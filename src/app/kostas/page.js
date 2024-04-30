@@ -13,9 +13,10 @@ export default function Home() {
 
     if (text.length > 5) {
       if (text.trim() !== "") {
+        setPredictions([]);
         try {
           const data = await autocomplete(text);
-          setPredictions([]);
+
           setPredictions(data.suggestions); // Update predictions state with new data
 
           console.log(data.suggestions);
