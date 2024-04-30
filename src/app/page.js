@@ -1,32 +1,9 @@
 "use client";
 
-import { useState } from 'react';
-import { autocomplete } from './autocomplete.js';
-import Image from "next/image";
 import LogoTxt from "../../public/spitoskilos_logo_txt.png";
 import LogoImg from "../../public/spitoskilos_logo_img.svg";
 
-
 export default function Home() {
-  const [inputText, setInputText] = useState('');
-  const [predictions, setPredictions] = useState([]);
-
-  const handleInputChange = async (event) => {
-    const text = event.target.value;
-    setInputText(text);
-    if (text.trim() !== '') {
-      try {
-        const data = await autocomplete(text);
-        setPredictions(data.predictions);
-      } catch (error) {
-        print("error")
-        // Handle error
-      }
-    } else {
-      setPredictions([]);
-    }
-  };
-
   return (
     <div className="flex items-center flex-col w-full h-screen">
       <div className="w-full bg-dog-back h-4/5 bg-no-repeat bg-cover bg-bottom ">
@@ -46,21 +23,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* Place the input field and predictions list here */}
-          <div className="w-11/12">
-            <input type="text" value={inputText} onChange={handleInputChange} />
-            {predictions && predictions.length > 0 && (
-              <ul>
-                {predictions.map((prediction) => (
-                  <li key={prediction.place_id}>{prediction.description}</li>
-                ))}
-              </ul>
-            )}
-          </div>
         </div>
       </div>
     </div>
   );
-  
-    
 }
