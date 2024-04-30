@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from 'react';
-import { autocomplete } from './autocomplete.js';
 import Image from "next/image";
 import LogoTxt from "../../public/spitoskilos_logo_txt.png";
 import LogoImg from "../../public/spitoskilos_logo_img.svg";
-
 
 export default function Home() {
   const [inputText, setInputText] = useState('');
@@ -16,10 +14,16 @@ export default function Home() {
     setInputText(text);
     if (text.trim() !== '') {
       try {
-        const data = await autocomplete(text);
+        const apiKey = 'AIzaSyC2lO3GSk-qj4gJTcFsmXP23d7oJqopuNA';
+        const url = `https://places.googleapis.com/v1/places:autocomplete?key=${apiKey}&input=${text}&location=37.7749,-122.4194&radius=5000`;
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Failed to fetch predictions');
+        }
+        const data = await response.json();
         setPredictions(data.predictions);
       } catch (error) {
-        print("error")
+        console.error('Error fetching predictions:', error);
         // Handle error
       }
     } else {
@@ -46,21 +50,19 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* Place the input field and predictions list here */}
-          <div className="w-11/12">
-            <input type="text" value={inputText} onChange={handleInputChange} />
-            {predictions && predictions.length > 0 && (
-              <ul>
-                {predictions.map((prediction) => (
-                  <li key={prediction.place_id}>{prediction.description}</li>
-                ))}
-              </ul>
-            )}
-          </div>
+        </div>
+        {/* Place the input field and predictions list here */}
+        <div className="w-11/12">
+          <input type="text" value={inputText} onChange={handleInputChange} />
+          {predictions.length > 0 && (
+            <ul>
+              {predictions.map((prediction) => (
+                <li key={prediction.place_id}>{prediction.description}</li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
   );
-  
-    
 }
