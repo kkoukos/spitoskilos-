@@ -1,35 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { autocomplete } from "./autocomplete.js";
+import { useDebounceEff } from "./hooks.js";
 
 export default function Home() {
   const [inputText, setInputText] = useState("");
   const [predictions, setPredictions] = useState([]);
+  var debouncedText = useDebounceEff(inputText);
+
+  // Declare timer constant
+  const timerRef = useRef(null);
 
   const handleInputChange = async (event) => {
     const text = event.target.value;
-    setInputText(text); // Update inputText state on every change
+    setInputText(text);
 
-    if (text.length > 5) {
-      if (text.trim() !== "") {
-        setPredictions([]);
+    // Clear the previous timeout
+    clearTimeout(timerRef.current);
+
+    // Set a new timeout
+    timerRef.current = setTimeout(async () => {
+      setPredictions([]);
+      if (text.length > 5) {
         try {
+          console.log(text);
           const data = await autocomplete(text);
-
-          setPredictions(data.suggestions); // Update predictions state with new data
-
+          setPredictions(data.suggestions);
           console.log(data.suggestions);
         } catch (error) {
-          console.error(error); // Log error to console
+          console.error("ERROR1", error);
           // Handle error
         }
-      } else {
-        setPredictions([]); // Clear predictions if input is empty
       }
-    } else {
-      setPredictions([]); // Clear predictions if input length is less than or equal to 5
-    }
+    }, 800); // Timeout duration, 1000 milliseconds = 1 second
   };
 
   return (
