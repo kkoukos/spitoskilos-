@@ -1,0 +1,96 @@
+Warning: Invalid DOM property `for`. Did you mean `htmlFor`?
+label
+div
+div
+div
+Hero@webpack-internal:///(app-pages-browser)/./src/components/Hero.js:28:86
+div
+div
+Home
+ClientPageRoot@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/client-page.js:14:32
+InnerLayoutRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:244:18
+RedirectErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9
+RedirectBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:24
+NotFoundErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9
+NotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:62
+LoadingBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:348:76
+ErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:67
+InnerScrollAndFocusHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9
+ScrollAndFocusHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:37
+RenderFromTemplateContext@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44
+OuterLayoutRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:369:157
+body
+html
+RootLayout (Server)
+RedirectErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9
+RedirectBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:24
+NotFoundErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9
+NotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:62
+DevRootNotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:33:24
+ReactDevOverlay@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/ReactDevOverlay.js:87:9
+HotReload@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:321:37
+Router@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:207:134
+ErrorBoundaryHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:113:9
+ErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:67
+AppRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:577:47
+ServerRoot@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:112:27
+Root@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:117:24 app-index.js:33:22
+athens Hero.js:44:29
+Array(5) [ {…}, {…}, {…}, {…}, {…} ]
+Hero.js:47:29
+Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `Hero`. See https://reactjs.org/link/warning-keys for more information.
+div
+Hero@webpack-internal:///(app-pages-browser)/./src/components/Hero.js:28:86
+div
+div
+Home
+ClientPageRoot@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/client-page.js:14:32
+InnerLayoutRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:244:18
+RedirectErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9
+RedirectBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:24
+NotFoundErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9
+NotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:62
+LoadingBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:348:76
+ErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:67
+InnerScrollAndFocusHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9
+ScrollAndFocusHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:37
+RenderFromTemplateContext@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44
+OuterLayoutRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:369:157
+body
+html
+RootLayout (Server)
+RedirectErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9
+RedirectBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:24
+NotFoundErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9
+NotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:62
+DevRootNotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:33:24
+ReactDevOverlay@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/ReactDevOverlay.js:87:9
+HotReload@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:321:37
+Router@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:207:134
+ErrorBoundaryHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:113:9
+ErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:67
+AppRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:577:47
+ServerRoot@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:112:27
+Root@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:117:24 app-index.js:33:22
+Athens,Greece Hero.js:56:17
+places/ChIJ8UNwBh-9oRQR3Y1mdkU1Nic Hero.js:58:17
+places/ChIJ8UNwBh-9oRQR3Y1mdkU1Nic Hero.js:66:17
+Promise { <state>: "rejected", <reason>: ReferenceError }
+Hero.js:67:17
+Uncaught (in promise) ReferenceError: assignment to undeclared variable apiKey
+    handlePlacesId webpack-internal:///(app-pages-browser)/./src/connectors/handlePlacesId.js:8
+    handelSearchButton webpack-internal:///(app-pages-browser)/./src/components/Hero.js:67
+    React 21
+    hydrateRoot webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/client.js:17
+    hydrate webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:197
+    startTransition React
+    hydrate webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:197
+    <anonymous> webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-next-dev.js:10
+    appBootstrap webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-bootstrap.js:57
+    loadScriptsInSequence webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-bootstrap.js:23
+    appBootstrap webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-bootstrap.js:56
+    <anonymous> webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-next-dev.js:8
+    NextJS 7
+page.js line 1455 > eval:8:5

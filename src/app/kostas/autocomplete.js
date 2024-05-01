@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function autocomplete(inputText) {
-  const apiKey = "AIzaSyC2lO3GSk-qj4gJTcFsmXP23d7oJqopuNA";
+  const apiKey = "";
   const url = "https://places.googleapis.com/v1/places:autocomplete";
 
   const requestBody = {

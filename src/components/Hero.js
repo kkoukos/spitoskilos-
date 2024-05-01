@@ -8,9 +8,11 @@ import {
   SquareFoot,
 } from "@mui/icons-material";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { League_Spartan } from "next/font/google";
 import { useState, useRef } from "react";
 import { PlaceConnector } from "../connectors/PlacesConnector";
+import { handlePlacesId } from "../connectors/handlePlacesId";
 
 const spartan_light = League_Spartan({
   subsets: ["latin"],
@@ -18,16 +20,17 @@ const spartan_light = League_Spartan({
 });
 
 export default function Hero() {
+  const router = useRouter();
   const [inputText, setInputText] = useState("");
   const [predictions, setPredictions] = useState([]);
   const timerRef = useRef(null);
   const [error, setError] = useState("");
-  const [placeID, setPlaceId] = useState("");
+  const [placeId, setPlaceId] = useState(null);
 
   const handleInputChange = async (event) => {
     const text = event.target.value;
     setInputText(text);
-    setPlaceId("");
+    setPlaceId(null);
     // Clear the previous timeout
     clearTimeout(timerRef.current);
 
@@ -54,6 +57,14 @@ export default function Hero() {
     console.log(key);
     setPlaceId(key);
     setInputText(event.target.innerText);
+  };
+
+  const handelSearchButton = async (event) => {
+    if (placeId == null) {
+      return console.log("null search");
+    }
+    const { lat, lon } = await handlePlacesId(placeId);
+    router.push(`/maps_v1?lat=${lat}&lon=${lon}`);
   };
 
   return (
@@ -149,7 +160,10 @@ export default function Hero() {
           {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"> */}
         </div>
         <div className="w-3/12 flex justify-end items-center">
-          <div className=" py-4 pr-8 pl-5 bg-blue-500 rounded-lg text-white text-lg gap-2 cursor-pointer hover:bg-blue-600 duration-500">
+          <div
+            className=" py-4 pr-8 pl-5 bg-blue-500 rounded-lg text-white text-lg gap-2 cursor-pointer hover:bg-blue-600 duration-500"
+            onClick={handelSearchButton}
+          >
             <Search></Search> SEARCH
           </div>
         </div>
