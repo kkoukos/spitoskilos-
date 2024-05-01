@@ -17,12 +17,13 @@ export default function Home() {
   }, [searchParams]);
 
   return (
-    <div>
-      <Head>
-        <title>Static Map</title>
-        <meta name="description" content="Google Static Map" />
-      </Head>
-      <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div>
+        <Head>
+          <title>Static Map</title>
+          <meta name="description" content="Google Static Map" />
+        </Head>
+
         <h1>
           Static Map ${lat},${lon}
         </h1>
@@ -35,7 +36,7 @@ export default function Home() {
             onError={() => setMapError(true)}
           />
         )}
-      </Suspense>
-    </div>
+      </div>
+    </Suspense>
   );
 }
