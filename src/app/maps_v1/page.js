@@ -13,8 +13,7 @@ export default function Home() {
   useEffect(() => {
     setLat(searchParams.get("lat"));
     setLon(searchParams.get("lon"));
-    console.log(lat);
-  }, [searchParams]);
+  }, [lat, lon, searchParams]);
 
   return (
     <div>

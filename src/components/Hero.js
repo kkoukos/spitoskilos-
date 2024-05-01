@@ -108,7 +108,10 @@ export default function Hero() {
               <div className="z-10 w-full max-h-[300px] absolute bg-white mt-4 text-zinc-600 text-lg pb-4 rounded-b-xl flex flex-col  items-center border-2 overflow-scroll">
                 {" "}
                 {predictions.map((prediction, index) => (
-                  <div className="w-11/12  pl-4 flex items-start border-b-2 my-2 hover:text-zinc-800 cursor-pointer gap-2">
+                  <div
+                    className="w-11/12  pl-4 flex items-start border-b-2 my-2 hover:text-zinc-800 cursor-pointer gap-2"
+                    key={"result" + index}
+                  >
                     <LocationOnOutlined> </LocationOnOutlined>{" "}
                     <p
                       data-key={prediction.placePrediction.place}
