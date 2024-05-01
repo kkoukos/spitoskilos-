@@ -14,15 +14,15 @@ export default function Home() {
   useEffect(() => {
     setLat(searchParams.get("lat"));
     setLon(searchParams.get("lon"));
-  }, [lat, lon, searchParams]);
+  }, [searchParams]);
 
   return (
-    <Suspense>
-      <div>
-        <Head>
-          <title>Static Map</title>
-          <meta name="description" content="Google Static Map" />
-        </Head>
+    <div>
+      <Head>
+        <title>Static Map</title>
+        <meta name="description" content="Google Static Map" />
+      </Head>
+      <Suspense fallback={<div>Loading...</div>}>
         <h1>
           Static Map ${lat},${lon}
         </h1>
@@ -35,7 +35,7 @@ export default function Home() {
             onError={() => setMapError(true)}
           />
         )}
-      </div>
-    </Suspense>
+      </Suspense>
+    </div>
   );
 }
