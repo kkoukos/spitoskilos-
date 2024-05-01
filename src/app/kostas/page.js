@@ -2,27 +2,23 @@
 
 import { useState, useRef } from "react";
 import { autocomplete } from "./autocomplete.js";
-import { useDebounceEff } from "./hooks.js";
 import { createEntry } from "./create.js";
 
 export default function Home() {
   const [inputText, setInputText] = useState("");
   const [predictions, setPredictions] = useState([]);
-  var debouncedText = useDebounceEff(inputText);
-
-  const [error, setError] = useState('')
+  const timerRef = useRef(null);
+  const [error, setError] = useState("");
 
   async function handleSubmit(formData) {
-    const result = await createEntry(formData)
+    const result = await createEntry(formData);
 
     if (result?.error) {
-      setError(result.error)
+      setError(result.error);
     }
-  };
-
+  }
 
   // Declare timer constant
-  const timerRef = useRef(null);
 
   const handleInputChange = async (event) => {
     const text = event.target.value;
@@ -54,13 +50,18 @@ export default function Home() {
         {/* Place the input field and predictions list here */}
         <form action={handleSubmit}>
           <input type="text" name="input"></input>
-        <button type="submit" className="bg-blue-500 text-white py-2 px-3 rounded">redis</button>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white py-2 px-3 rounded"
+          >
+            redis
+          </button>
           {error && <div className="error">{error}</div>}
-          </form>
+        </form>
         <div className="w-11/12">
           <input
-          id="location"
-          name="location"
+            id="location"
+            name="location"
             type="text"
             value={inputText} // Bind inputText state to input value
             onChange={handleInputChange}

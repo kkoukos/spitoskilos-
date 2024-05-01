@@ -9,12 +9,53 @@ import {
 } from "@mui/icons-material";
 import Image from "next/image";
 import { League_Spartan } from "next/font/google";
+import { useState, useRef } from "react";
+import { PlaceConnector } from "../connectors/PlacesConnector";
+
 const spartan_light = League_Spartan({
   subsets: ["latin"],
   weight: ["300"],
 });
 
 export default function Hero() {
+  const [inputText, setInputText] = useState("");
+  const [predictions, setPredictions] = useState([]);
+  const timerRef = useRef(null);
+  const [error, setError] = useState("");
+  const [placeID, setPlaceId] = useState("");
+
+  const handleInputChange = async (event) => {
+    const text = event.target.value;
+    setInputText(text);
+    setPlaceId("");
+    // Clear the previous timeout
+    clearTimeout(timerRef.current);
+
+    // Set a new timeout
+    timerRef.current = setTimeout(async () => {
+      setPredictions([]);
+      if (text.length > 5) {
+        try {
+          console.log(text);
+          const data = await PlaceConnector(text);
+          setPredictions(data.suggestions);
+          console.log(data.suggestions);
+        } catch (error) {
+          console.error("Error in place api:", error);
+          // Handle error
+        }
+      }
+    }, 800); // Timeout duration, 1000 milliseconds = 1 second
+  };
+
+  const handleLocationClick = async (event) => {
+    console.log(event.target.innerText);
+    const key = event.target.getAttribute("data-key"); // inputText = event.id;
+    console.log(key);
+    setPlaceId(key);
+    setInputText(event.target.innerText);
+  };
+
   return (
     <div className="flex items-center flex-col w-full h-full justify-center text-4xl gap-12">
       <h2>Search, Discover, Find Your Dream Home</h2>
@@ -32,13 +73,50 @@ export default function Hero() {
               className="w-11/12 text-zinc-600 text-lg pl-1 focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="e.g Alimos,Vari,Pagrati"
+              value={inputText}
+              onChange={handleInputChange}
             ></input>
-            <div className="z-10 w-full absolute bg-white mt-4 text-zinc-600 text-lg pb-4 rounded-b-xl flex flex-col  items-center border-2">
-              {" "}
-              <div className="w-11/12  pl-4 flex items-start border-b-2 my-2 hover:text-zinc-800 cursor-pointer gap-2">
-                <LocationOnOutlined> </LocationOnOutlined> <p>TEST</p>
+            {/* {predictions && predictions.length > 0 && (
+            <ul>
+              {predictions.map((prediction) => (
+                <li
+                  key={
+                    prediction.placePrediction.structuredFormat.mainText.text
+                  }
+                >
+                  {prediction.placePrediction.structuredFormat.mainText.text},
+                  {
+                    prediction.placePrediction.structuredFormat.secondaryText
+                      .text
+                  }
+                </li>
+              ))}
+            </ul>
+          )} */}
+            {predictions && inputText.length > 5 && (
+              <div className="z-10 w-full max-h-[300px] absolute bg-white mt-4 text-zinc-600 text-lg pb-4 rounded-b-xl flex flex-col  items-center border-2 overflow-scroll">
+                {" "}
+                {predictions.map((prediction, index) => (
+                  <div className="w-11/12  pl-4 flex items-start border-b-2 my-2 hover:text-zinc-800 cursor-pointer gap-2">
+                    <LocationOnOutlined> </LocationOnOutlined>{" "}
+                    <p
+                      data-key={prediction.placePrediction.place}
+                      onClick={handleLocationClick}
+                    >
+                      {
+                        prediction.placePrediction.structuredFormat.mainText
+                          .text
+                      }
+                      ,
+                      {
+                        prediction.placePrediction.structuredFormat
+                          .secondaryText.text
+                      }
+                    </p>
+                  </div>
+                ))}
               </div>
-            </div>
+            )}
           </div>
           {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"> */}
         </div>
