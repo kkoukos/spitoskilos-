@@ -11,10 +11,13 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "dog-back": "url('/skilos_1.png')",
+        "dog-back": "url('/house_back.png')",
       },
       height: {
         128: "56rem",
+      },
+      colors: {
+        "primary-text": "#E9E4DE",
       },
     },
   },
