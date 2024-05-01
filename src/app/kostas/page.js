@@ -3,11 +3,23 @@
 import { useState, useRef } from "react";
 import { autocomplete } from "./autocomplete.js";
 import { useDebounceEff } from "./hooks.js";
+import { createEntry } from "./create.js";
 
 export default function Home() {
   const [inputText, setInputText] = useState("");
   const [predictions, setPredictions] = useState([]);
   var debouncedText = useDebounceEff(inputText);
+
+  const [error, setError] = useState('')
+
+  async function handleSubmit(formData) {
+    const result = await createEntry(formData)
+
+    if (result?.error) {
+      setError(result.error)
+    }
+  };
+
 
   // Declare timer constant
   const timerRef = useRef(null);
@@ -40,8 +52,15 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-gray-600 text-black">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         {/* Place the input field and predictions list here */}
+        <form action={handleSubmit}>
+          <input type="text" name="input"></input>
+        <button type="submit" className="bg-blue-500 text-white py-2 px-3 rounded">redis</button>
+          {error && <div className="error">{error}</div>}
+          </form>
         <div className="w-11/12">
           <input
+          id="location"
+          name="location"
             type="text"
             value={inputText} // Bind inputText state to input value
             onChange={handleInputChange}

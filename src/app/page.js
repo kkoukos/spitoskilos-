@@ -1,5 +1,7 @@
 "use client";
 
+<script src="http://localhost:3001"></script>
+
 import { useState } from "react";
 import Image from "next/image";
 import LogoTxt from "../../public/spitoskilos_logo_txt.png";
