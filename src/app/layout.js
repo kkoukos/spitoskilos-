@@ -2,6 +2,7 @@ import { Bagel_Fat_One } from "next/font/google";
 import { League_Spartan } from "next/font/google";
 
 import "./globals.css";
+import { Suspense } from "react";
 
 const bagel_fat_1 = Bagel_Fat_One({ subsets: ["latin"], weight: ["400"] });
 const spartan_main_font = League_Spartan({
@@ -14,8 +15,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={spartan_main_font.className}>{children}</body>
-    </html>
+    <Suspense>
+      <html lang="en">
+        <body className={spartan_main_font.className}>{children}</body>
+      </html>
+    </Suspense>
   );
 }

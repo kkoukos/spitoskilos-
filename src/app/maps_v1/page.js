@@ -7,8 +7,8 @@ import Head from "next/head";
 
 export default function Home() {
   const searchParams = useSearchParams();
-  const [lat, setLat] = useState("");
-  const [lon, setLon] = useState("");
+  const [lat, setLat] = useState(30);
+  const [lon, setLon] = useState(30);
   const [mapError, setMapError] = useState(false);
 
   useEffect(() => {
