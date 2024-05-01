@@ -14,7 +14,7 @@ export default function Home() {
       <div className="w-full bg-dog-back h-4/5 bg-no-repeat bg-cover bg-right-bottom ">
         {/* to outer div einai gia to image to inner gia na organonei ta pragmata */}
         <div className="w-full  flex flex-col items-center pt-4">
-          <div className="flex backdrop-blur-md justify-between w-11/12  rounded-md p-5">
+          <div className="flex backdrop-blur-xl justify-between w-11/12  rounded-md p-5">
             <div className="flex items-center gap-2 ">
               <img
                 src={LogoImg.src}
