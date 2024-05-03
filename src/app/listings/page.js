@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import NavBarSticky from "../../components/NavBarSticky";
 import Filters from "./components/Filters";
 import PropertyDisplay from "./components/PropertyDisplay";

@@ -7,7 +7,8 @@ export async function GET(req) {
     console.log("Connected to MongoDB.");
 
     const data = await db.collection("Residences").find({}).toArray();
-    console.log("Data retrieved:", data);
+    // console.log("Data retrieved:", data);
+    console.log("Data received.");
 
     return Response.json(data);
   } catch (e) {
