@@ -61,13 +61,34 @@ export default function Hero() {
 
   const handelSearchButton = async (event) => {
     if (placeId == null) {
-      const temp = await fetch("/api/testapi");
-      const data = temp.json();
-      console.log(data);
       return console.log("null search");
     }
-    const { lat, lon } = await handlePlacesId(placeId);
-    // router.push(`/maps_v1?lat=${lat}&lon=${lon}`);
+
+    const data = {
+      placesId: placeId,
+    };
+
+    try {
+      const response = await fetch("api/returnLatLon", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const { lat, lon } = await response.json();
+
+        router.push(`/maps_v1?lat=${lat}&lon=${lon}`);
+      } else {
+        console.log(response.statusText);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    // const { lat, lon } = await handlePlacesId(placeId);
   };
 
   return (
@@ -76,7 +97,7 @@ export default function Hero() {
       <div className="max-w-[1080px] bg-white flex p-4 rounded-xl flex w-3/5 justify-between ">
         <div className="flex flex-col w-5/12 border-r-2  relative">
           <label
-            for="area"
+            htmlFor="area"
             className="text-zinc-700 text-base flex items-center "
           >
             <Place fontSize="small"></Place> Location
@@ -138,7 +159,10 @@ export default function Hero() {
           {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"> */}
         </div>
         <div className="flex flex-col w-2/12 pl-6">
-          <label for="area" className="text-black text-base flex items-center ">
+          <label
+            htmlFor="area"
+            className="text-black text-base flex items-center "
+          >
             <Savings fontSize="small"></Savings> Price
           </label>
           <div className={spartan_light.className}>
@@ -152,7 +176,10 @@ export default function Hero() {
           {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"> */}
         </div>
         <div className="flex flex-col w-2/12 pl-6  border-r-2">
-          <label for="area" className="text-black text-base flex items-center ">
+          <label
+            htmlFor="area"
+            className="text-black text-base flex items-center "
+          >
             <SquareFoot></SquareFoot> Surface
           </label>
           <div className={spartan_light.className}>
