@@ -9,9 +9,10 @@ import PropertyDisplay from "./components/PropertyDisplay";
 export default function Home() {
   return (
     <>
-      <div className="h-screen flex flex-col">
+      <div className="h-screen flex flex-col ">
         <NavBarSticky></NavBarSticky>
         <Filters></Filters>
+
         <PropertyDisplay></PropertyDisplay>
       </div>
     </>

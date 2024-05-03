@@ -17,7 +17,7 @@ export default function PropertyDisplay() {
     setLng(searchParams.get("lng"));
   }, [searchParams]);
   const [markersList, setMarkersList] = useState([]); // State to store latLngList
-  const [markersList2, setMarkersList2] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,6 +29,7 @@ export default function PropertyDisplay() {
           lng: longitude,
         }));
         setMarkersList(newMarkersList); // Set latLngList state
+        setLoading(false);
       } catch (error) {
         console.log("Error fetching data:", error);
       }
@@ -41,22 +42,19 @@ export default function PropertyDisplay() {
         <div className="w-1/2 overflow-auto">
           <ListingsGallery />
         </div>
-        {/* {markersList.length > 0 && ( // Render map only if latLngList is not empty
-          <ListingsMap
-            lat="37.983810"
-            lng="23.727539"
-            markersList={markersList}
-          ></ListingsMap>
-        )} */}
 
-        <div className="w-1/2 h-full sticky top-0">
-          <Map
-            className="w-full h-full"
-            lat={lat}
-            lng={lng}
-            markers={markersList}
-          />
-        </div>
+        <Suspense fallback={<Spinner size="lg" />}>
+          {loading ? (
+            <div className=" flex items-center justify-center w-full h-full">
+              <Spinner size="lg" />{" "}
+            </div>
+          ) : (
+            // Display spinner while loading
+            <div className="w-full h-full">
+              <Map lat={lat} lng={lng} markers={markersList} />
+            </div>
+          )}
+        </Suspense>
       </div>
     </>
   );
