@@ -14,13 +14,13 @@ export default function NavBar() {
             ABOUT US
           </div>
           <div className=" py-4 cursor-pointer border-transparent border-b-4 hover:border-primary-text ">
-            FAQ{" "}
+            FAQ
           </div>
           <div className=" py-4 cursor-pointer border-transparent border-b-4 hover:border-primary-text ">
             CONTACT US
           </div>
           <div className="border-2 p-2 rounded-lg hover:bg-white hover:text-slate-500 duration-500 cursor-pointer">
-            LOG IN/ REGISTER{" "}
+            LOG IN/ REGISTER
           </div>
         </div>
       </div>

@@ -15,10 +15,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <Suspense>
-      <html lang="en">
-        <body className={spartan_main_font.className}>{children}</body>
-      </html>
-    </Suspense>
+    <html lang="en">
+      <body className={spartan_main_font.className}>{children}</body>
+    </html>
   );
 }
