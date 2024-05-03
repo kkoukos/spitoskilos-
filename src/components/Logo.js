@@ -1,7 +1,7 @@
 import React from "react";
 
 import LogoTxt from "../../public/spitoskilos_logo_txt.png";
-import LogoImg from "../../public/spitoskilos_logo_img.svg";
+import LogoImg from "../../public/spitoskilos_logo_img_white.svg";
 
 export default function Logo() {
   return (

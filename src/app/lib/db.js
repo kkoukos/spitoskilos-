@@ -1,21 +1,11 @@
-import { createClient } from 'redis';
+import { MongoClient } from "mongodb";
 
-const client = createClient({
-    password: 'C2ND8qdWZstRhEuASTjiAp58m0R3bZJw',
-    socket: {
-        host: 'redis-11847.c56.east-us.azure.redns.redis-cloud.com',
-        port: 11847
-    }
-});
+const uri = process.env.NEXT_PUBLIC_MONGODB_URI;
 
-console.log("yeah")
+// Create a new MongoClient instance with the URI and options
+const client = new MongoClient(uri);
 
+// Connect to the client and store the promise
+let clientPromise = client.connect();
 
-client.on('error', (err) => console.log(err))
-
-if (!client.isOpen) {
-    client.connect()
-    console.log("yeah")
-}
-
-export { client }
+export default clientPromise;

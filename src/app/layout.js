@@ -1,5 +1,6 @@
 import { Bagel_Fat_One } from "next/font/google";
 import { League_Spartan } from "next/font/google";
+import { NextUIProvider } from "@nextui-org/react";
 
 import "./globals.css";
 import { Suspense } from "react";
@@ -16,9 +17,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Suspense>
-        <body className={spartan_main_font.className}>{children}</body>
-      </Suspense>
+      <body className={spartan_main_font.className}>
+        <NextUIProvider>
+          <Suspense>{children} </Suspense>
+        </NextUIProvider>
+      </body>
     </html>
   );
 }
