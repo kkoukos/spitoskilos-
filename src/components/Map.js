@@ -18,14 +18,10 @@ export default function Map(props) {
   });
 
   const onLoad = (map) => {
-    if (markers.length > 0) {
-      const bounds = new google.maps.LatLngBounds();
-      markers?.forEach(({ lat, lng }) => bounds.extend({ lat, lng }));
-      map.fitBounds(bounds);
-    }
+    const bounds = new google.maps.LatLngBounds();
+    markers?.forEach(({ lat, lng }) => bounds.extend({ lat, lng }));
+    map.fitBounds(bounds);
   };
-
-  //   const markers = [{ lat: lat, lng: lng }];
 
   const center = {
     lat: lat,
@@ -38,7 +34,7 @@ export default function Map(props) {
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={21}
+      zoom={18}
       onLoad={onLoad}
     >
       {markers.map(({ lat, lng }) => (

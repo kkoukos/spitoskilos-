@@ -50,12 +50,7 @@ export default function PropertyDisplay() {
         )} */}
 
         <div className="bg-red-900 w-full h-full">
-          <Map
-            className="w-full h"
-            lat={lat}
-            lng={lng}
-            markers={markersList2}
-          />
+          <Map className="w-full h" lat={lat} lng={lng} markers={markersList} />
         </div>
       </div>
     </>
