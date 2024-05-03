@@ -8,7 +8,7 @@ export default function Filters() {
     <>
       <div className="w-full  pt-2 h-20 flex justify-center">
         <div className="w-11/12  h-full flex justify-between items-center">
-          <div className="flex justify-start w-1/4 gap-4">
+          <div className="flex justify-start w-1/4 gap-4 ">
             <Select label="Rent" color="[#14293A]" variant="faded">
               <SelectItem>TEST</SelectItem>
             </Select>
