@@ -34,7 +34,7 @@ export default function Map(props) {
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={18}
+      zoom={21}
       onLoad={onLoad}
     >
       {markers.map(({ lat, lng }) => (
