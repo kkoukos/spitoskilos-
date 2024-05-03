@@ -37,8 +37,8 @@ export default function Map(props) {
       zoom={21}
       onLoad={onLoad}
     >
-      {markers.map(({ lat, lng }) => (
-        <Marker position={{ lat, lng }} />
+      {markers.map(({ lat, lng }, index) => (
+        <Marker position={{ lat, lng }} key={index} />
       ))}
     </GoogleMap>
   ) : (
