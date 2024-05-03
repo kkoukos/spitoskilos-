@@ -37,19 +37,26 @@ export default function PropertyDisplay() {
   }, []); // Empty dependency array ensures useEffect runs only once
   return (
     <>
-      <div className="w-full h-full flex justify-center">
-        <ListingsGallery></ListingsGallery>
+      <div className="flex w-full h-screen">
+        <div className="w-1/2 overflow-auto">
+          <ListingsGallery />
+        </div>
+        {/* {markersList.length > 0 && ( // Render map only if latLngList is not empty
+          <ListingsMap
+            lat="37.983810"
+            lng="23.727539"
+            markersList={markersList}
+          ></ListingsMap>
+        )} */}
 
-        <Suspense fallback={<Spinner size="lg" />}>
-          <div className=" w-full h-full">
-            <Map
-              className="w-full h"
-              lat={lat}
-              lng={lng}
-              markers={markersList}
-            />
-          </div>
-        </Suspense>
+        <div className="w-1/2 h-full sticky top-0">
+          <Map
+            className="w-full h-full"
+            lat={lat}
+            lng={lng}
+            markers={markersList}
+          />
+        </div>
       </div>
     </>
   );
