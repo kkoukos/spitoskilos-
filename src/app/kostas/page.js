@@ -20,6 +20,11 @@ export default function Home() {
 
   // Declare timer constant
 
+  const handleClick = async (event) => {
+    event.preventDefault();
+    console.log("kostas");
+  };
+
   const handleInputChange = async (event) => {
     const text = event.target.value;
     setInputText(text);
@@ -85,6 +90,9 @@ export default function Home() {
             </ul>
           )}
         </div>
+      </div>
+      <div>
+        <div onClick={handleClick()}>TEST</div>
       </div>
     </main>
   );

@@ -61,10 +61,13 @@ export default function Hero() {
 
   const handelSearchButton = async (event) => {
     if (placeId == null) {
+      const temp = await fetch("/api/testapi");
+      const data = temp.json();
+      console.log(data);
       return console.log("null search");
     }
     const { lat, lon } = await handlePlacesId(placeId);
-    router.push(`/maps_v1?lat=${lat}&lon=${lon}`);
+    // router.push(`/maps_v1?lat=${lat}&lon=${lon}`);
   };
 
   return (
