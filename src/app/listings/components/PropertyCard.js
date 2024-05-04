@@ -12,7 +12,7 @@ export default function PropertyCard({ property }) {
       <img
         //   object-cover, fits the image when the window is smaller
         className="w-1/3 object-cover rounded-l-xl"
-        src="https://m3.spitogatos.gr/281266820_1600x1200.jpg?v=20130730"
+        src={property.pictures[0]}
         alt="Property Photo"
       />
       <div className="w-2/3 p-4 ">

@@ -36,7 +36,7 @@ export default function Home() {
         setListings(tempListings);
         setFilteredListings(tempListings);
         // Map through listings to create latLngList
-
+        console.log(listings);
         setLoading(false);
       } catch (error) {
         console.log("Error fetching data:", error);
@@ -49,6 +49,7 @@ export default function Home() {
       lat: latitude,
       lng: longitude,
     }));
+    console.log(tempMarkers);
 
     setMarkersList(tempMarkers);
   }, [filteredListings]);

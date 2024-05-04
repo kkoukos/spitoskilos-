@@ -14,7 +14,7 @@ export default function Filters({
 }) {
   const [type, setType] = React.useState();
 
-  const [subCategory, setSubCategory] = React.useState([]);
+  const [subCategory, setSubCategory] = React.useState(new Set());
 
   const [category, setCategory] = React.useState("");
 
@@ -57,13 +57,11 @@ export default function Filters({
   };
 
   React.useEffect(() => {
-    console.log(category);
-    console.log(subCategory);
-
     let templist = listings;
 
     // Checking if subCategory Set is empty
-    if (subCategory.size != 0) {
+
+    if (subCategory.size !== 0) {
       templist = templist.filter((listing) =>
         subCategory.has(listing.propertyCategory)
       );
