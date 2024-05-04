@@ -17,12 +17,16 @@ export default function PropertyDisplay() {
     setLng(searchParams.get("lng"));
   }, [searchParams]);
   const [markersList, setMarkersList] = useState([]); // State to store latLngList
+
+  const [finalListings, setFinalListings] = useState([]); // State to store latLngList
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("/api/allListings"); // Fetch data
         const listings = await response.json(); // Parse JSON
+        setFinalListings(listings);
         // Map through listings to create latLngList
         const newMarkersList = listings.map(({ latitude, longitude }) => ({
           lat: latitude,
@@ -40,12 +44,11 @@ export default function PropertyDisplay() {
     <>
       <div
         className="flex w-full "
-        style={{ maxHeight: "calc(100vh - 204px)" }}
+        style={{
+          maxHeight: "calc(100vh - 204px)",
+          minHeight: "calc(100vh - 204px)",
+        }}
       >
-        <div className="w-1/2 ">
-          <ListingsGallery />
-        </div>
-
         <Suspense fallback={<Spinner size="lg" />}>
           {loading ? (
             <div className=" flex items-center justify-center w-full h-full">
@@ -53,9 +56,14 @@ export default function PropertyDisplay() {
             </div>
           ) : (
             // Display spinner while loading
-            <div className="w-full h-full">
-              <Map lat={lat} lng={lng} markers={markersList} />
-            </div>
+            <>
+              <div className="w-1/2 ">
+                <ListingsGallery data={finalListings} />
+              </div>
+              <div className="w-full h-full">
+                <Map lat={lat} lng={lng} markers={markersList} />
+              </div>
+            </>
           )}
         </Suspense>
       </div>
