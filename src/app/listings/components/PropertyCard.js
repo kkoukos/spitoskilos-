@@ -7,7 +7,7 @@ export default function PropertyCard({ property }) {
   return (
     <a
       href={detailsUrl}
-      className="relative flex w-full bg-white shadow-lg rounded-xl mt-4 mb-4 border-1 hover:shadow-2xl transition-shadow duration-300"
+      className="relative flex w-full bg-white shadow-lg rounded-xl mt-4 mb-4 border-1 hover:shadow-2xl transition-shadow duration-300 h-56"
     >
       <img
         //   object-cover, fits the image when the window is smaller
@@ -20,7 +20,9 @@ export default function PropertyCard({ property }) {
           {property.propertyCategory}, {property.surface}m²
         </div>
         <p className=" text-sm ">{property.area}</p>
-        <p className=" text-gray-400 mt-2 ">{property.description}</p>
+        <p className=" text-gray-400 mt-2 truncate h-1/4 w-[90%]">
+          {property.description}
+        </p>
 
         <div className="flex items-center text-gray-400 mt-3 space-x-4">
           <BedOutlinedIcon className="mb-1 text-md" />

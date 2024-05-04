@@ -9,7 +9,7 @@ export default function ListingsGallery(props) {
   return (
     <>
       <div
-        className="bg-gray-100 w-full p-6 flex flex-col "
+        className="bg-gray-100 w-full p-6 flex flex-col h-full"
         style={{ maxHeight: "calc(100vh - 204px)" }}
       >
         <div className="text-2xl mb-4">Homes for sale: {name}</div>

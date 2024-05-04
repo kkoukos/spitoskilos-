@@ -23,12 +23,24 @@ export default function Filters({
   const [maxPrice, setMaxPrice] = React.useState(1000000);
 
   React.useEffect(() => {
-    if (listings.length > 0) {
-      let maxPrice = Math.max(...listings.map((listing) => listing.price));
-      setMaxPrice(maxPrice);
+    if (listings.length === 0) {
+      // Handle the case where filteredListings is empty
+      console.warn("No filtered listings available.");
+      return; // Exit the useEffect early
     }
-    setPrice([minPrice, maxPrice]);
-  }, []);
+    // Calculate minPrice and maxPrice
+    const prices = listings.map((listing) => listing.price);
+    const validPrices = prices.filter((price) => !isNaN(price)); // Filter out NaN prices
+
+    let maxPrice = Math.max(...validPrices);
+
+    if (!isNaN(maxPrice)) {
+      // Update state with both minPrice and maxPrice
+
+      setMaxPrice(maxPrice);
+      setPrice([0, maxPrice]);
+    }
+  }, [listings]);
 
   const sub_categories_houses = [
     "Apartment",

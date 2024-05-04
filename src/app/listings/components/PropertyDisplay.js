@@ -34,7 +34,7 @@ export default function PropertyDisplay({
           ) : (
             // Display spinner while loading
             <>
-              <div className="w-1/2 ">
+              <div className="w-[35%] min-w-[35%] ">
                 <ListingsGallery data={filteredListings} name={name} />
               </div>
               <div className="w-full h-full">
