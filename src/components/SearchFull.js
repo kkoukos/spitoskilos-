@@ -79,7 +79,7 @@ export default function SearchFull() {
       if (response.ok) {
         const { lat, lon } = await response.json();
 
-        router.push(`/listings?lat=${lat}&lng=${lon}`);
+        router.push(`/listings?lat=${lat}&lng=${lon}&name=${inputText}`);
       } else {
         console.log(response.statusText);
       }

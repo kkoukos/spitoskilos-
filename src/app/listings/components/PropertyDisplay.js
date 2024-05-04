@@ -19,7 +19,7 @@ export default function PropertyDisplay() {
   const [markersList, setMarkersList] = useState([]); // State to store latLngList
 
   const [finalListings, setFinalListings] = useState([]); // State to store latLngList
-
+  const [name, setName] = useState(searchParams.get("name") || "location");
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +58,7 @@ export default function PropertyDisplay() {
             // Display spinner while loading
             <>
               <div className="w-1/2 ">
-                <ListingsGallery data={finalListings} />
+                <ListingsGallery data={finalListings} name={name} />
               </div>
               <div className="w-full h-full">
                 <Map lat={lat} lng={lng} markers={markersList} />
