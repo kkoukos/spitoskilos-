@@ -99,10 +99,13 @@ export default function ListingsGallery() {
 
   return (
     <>
-      <div className="bg-gray-100 w-full min-h-screen p-6">
-        <div className="flex-col">
-          <div className="text-2xl mb-4">Homes for sale: LOCATION</div>
-          <div className="text-xs mb-4">Showing {data.length} results</div>
+      <div
+        className="bg-gray-100 w-full p-6 flex flex-col "
+        style={{ maxHeight: "calc(100vh - 204px)" }}
+      >
+        <div className="text-2xl mb-4">Homes for sale: LOCATION</div>
+        <div className="text-xs mb-4">Showing {data.length} results</div>
+        <div className="flex-col overflow-y-scroll no-scrollbar">
           <div className="flex flex-wrap justify-center">
             {data.map((property) => (
               <PropertyCard key={property._id} property={property} />

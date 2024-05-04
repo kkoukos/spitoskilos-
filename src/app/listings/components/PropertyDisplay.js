@@ -40,9 +40,9 @@ export default function PropertyDisplay() {
     <>
       <div
         className="flex w-full "
-        style={{ maxHeight: "calc(100vh - 197px)" }}
+        style={{ maxHeight: "calc(100vh - 204px)" }}
       >
-        <div className="w-1/2 overflow-auto">
+        <div className="w-1/2 ">
           <ListingsGallery />
         </div>
 

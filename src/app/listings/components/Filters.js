@@ -12,8 +12,8 @@ export default function Filters() {
   return (
     <>
       <div className="w-full  pt-6 h-24 flex justify-center shadow-sm pb-6">
-        <div className="w-11/12  h-full flex justify-between items-center">
-          <div className="flex justify-start w-8/12 gap-6">
+        <div className="w-full  h-full flex justify-between items-center pl-4 pr-4">
+          <div className="flex justify-start w-full gap-6">
             <Select
               label="Rent"
               className="max-w-52"

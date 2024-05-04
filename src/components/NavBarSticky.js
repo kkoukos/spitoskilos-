@@ -6,8 +6,8 @@ import Logo from "./Logo";
 
 export default function NavBarSticky() {
   return (
-    <div className="w-full flex flex-col items-center  z-50  text-primary-text bg-[#14293A]">
-      <div className="flex backdrop-blur-xl justify-between w-11/12 rounded-md p-5">
+    <div className="w-full flex flex-col items-center z-50  text-primary-text bg-[#14293A]">
+      <div className="flex  justify-between w-full rounded-md px-4 py-6 items-center">
         <Logo></Logo>
         <div className="flex w-4/12 h-18 items-baseline justify-end gap-10">
           <div className="py-4 cursor-pointer  border-transparent border-b-4 hover:border-primary-text">
