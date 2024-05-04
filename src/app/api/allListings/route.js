@@ -3,7 +3,7 @@ import clientPromise from "../../lib/db";
 export async function GET(req) {
   try {
     const client = await clientPromise;
-    const db = client.db("advertisements");
+    const db = client.db("listings");
     console.log("Connected to MongoDB.");
 
     const data = await db.collection("Residences").find({}).toArray();
