@@ -38,7 +38,10 @@ export default function PropertyDisplay() {
   }, []); // Empty dependency array ensures useEffect runs only once
   return (
     <>
-      <div className="flex w-full h-screen">
+      <div
+        className="flex w-full "
+        style={{ maxHeight: "calc(100vh - 197px)" }}
+      >
         <div className="w-1/2 overflow-auto">
           <ListingsGallery />
         </div>
