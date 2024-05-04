@@ -1,5 +1,10 @@
 import React from "react";
-import { Marker, GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import {
+  Marker,
+  GoogleMap,
+  useJsApiLoader,
+  MarkerClusterer,
+} from "@react-google-maps/api";
 
 const containerStyle = {
   width: "100%",
@@ -28,6 +33,16 @@ export default function Map(props) {
     lng: lng,
   };
 
+  const customMarker = {
+    path: "M 0 -1 A 1 1 0 0 0 0 1 A 1 1 0 0 0 0 -1",
+    fillColor: "#14293A",
+    fillOpacity: 10,
+    strokeColor: "white",
+    strokeWeight: 2,
+    rotation: 0,
+    scale: 6,
+  };
+
   console.log(lat);
 
   return isLoaded ? (
@@ -38,7 +53,7 @@ export default function Map(props) {
       onLoad={onLoad}
     >
       {markers.map(({ lat, lng }, index) => (
-        <Marker position={{ lat, lng }} key={index} />
+        <Marker position={{ lat, lng }} key={index} icon={customMarker} />
       ))}
     </GoogleMap>
   ) : (

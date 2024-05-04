@@ -3,7 +3,7 @@ import BathtubOutlinedIcon from "@mui/icons-material/BathtubOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 export default function PropertyCard({ property }) {
-  const detailsUrl = `/properties/${property._id}`;
+  const detailsUrl = `/listings/${property._id}`;
   return (
     <a
       href={detailsUrl}
