@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  HomeWork,
   LocationOnOutlined,
   Place,
   Savings,
@@ -22,9 +23,19 @@ export default function SearchFull() {
   const router = useRouter();
   const [inputText, setInputText] = useState("");
   const [predictions, setPredictions] = useState([]);
+  const [dropdownPred, setDropdownPred] = useState(false);
   const timerRef = useRef(null);
   const [error, setError] = useState("");
+  const [category, setCategory] = useState("House");
+  const [dropdownCat, setDropdownCat] = useState(false);
   const [placeId, setPlaceId] = useState(null);
+
+  const catList = ["House", "Commercial", "Land", "Other"];
+
+  function handleAllDropdowns() {
+    setDropdownPred(false);
+    setDropdownCat(false);
+  }
 
   const handleInputChange = async (event) => {
     const text = event.target.value;
@@ -56,6 +67,14 @@ export default function SearchFull() {
     console.log(key);
     setPlaceId(key);
     setInputText(event.target.innerText);
+    setPredictions(false);
+  };
+  const handleCatClick = async (event) => {
+    const key = event.target.getAttribute("data-key"); // inputText = event.id;
+    console.log(key);
+    setCategory(key);
+
+    setDropdownCat(false);
   };
 
   const handelSearchButton = async (event) => {
@@ -107,6 +126,10 @@ export default function SearchFull() {
             placeholder="e.g Alimos,Vari,Pagrati"
             value={inputText}
             onChange={handleInputChange}
+            onClick={() => {
+              handleAllDropdowns();
+              setDropdownPred(true);
+            }}
           ></input>
           {/* {predictions && predictions.length > 0 && (
             <ul>
@@ -125,7 +148,7 @@ export default function SearchFull() {
               ))}
             </ul>
           )} */}
-          {predictions && inputText.length > 5 && (
+          {predictions && inputText.length > 3 && dropdownPred && (
             <div className="z-10 w-full max-h-[300px] absolute bg-white mt-4 text-zinc-600 text-lg pb-4 rounded-b-xl flex flex-col  items-center border-2 overflow-scroll">
               {" "}
               {predictions.map((prediction, index) => (
@@ -151,29 +174,49 @@ export default function SearchFull() {
         </div>
         {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"> */}
       </div>
-      <div className="flex flex-col w-2/12 pl-6">
+      <div className="flex flex-col w-2/12 pl-4 relative">
         <label
           htmlFor="area"
           className="text-black text-base flex items-center "
         >
-          <Savings fontSize="small"></Savings> Price
+          <HomeWork></HomeWork> Category
         </label>
-        <div className={spartan_light.className}>
+        <div
+          className={spartan_light.className}
+          onClick={() => {
+            handleAllDropdowns();
+            setDropdownCat(!dropdownCat);
+          }}
+        >
           <input
             id="area"
-            className="w-full text-zinc-600 text-lg pl-1 focus:outline-none focus:shadow-outline"
+            className="w-full text-black text-lg pl-1 focus:outline-none focus:shadow-outline"
             type="text"
-            placeholder="From-to €"
+            placeholder=""
+            value={category}
           ></input>
+          {dropdownCat && (
+            <div className="z-10 w-full max-h-[220px] absolute bg-white mt-4 text-zinc-600 text-lg pb-4 rounded-b-xl flex flex-col  items-center border-2 overflow-scroll">
+              {catList.map((cat, index) => (
+                <div
+                  className="w-11/12  pl-2 flex items-start border-b-2 my-2 hover:text-zinc-800 cursor-pointer gap-2"
+                  key={"result" + index}
+                >
+                  <p data-key={cat} onClick={handleCatClick}>
+                    {cat}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-        {/* <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"> */}
       </div>
       <div className="flex flex-col w-2/12 pl-6  border-r-2">
         <label
           htmlFor="area"
           className="text-black text-base flex items-center "
         >
-          <SquareFoot></SquareFoot> Surface
+          <Savings fontSize="small"></Savings> Price
         </label>
         <div className={spartan_light.className}>
           <input

@@ -141,7 +141,7 @@ export default function Filters({
               label="Price"
               color="primary"
               formatOptions={{ style: "currency", currency: "EUR" }}
-              step={maxPrice / 10000}
+              step={maxPrice / 20000}
               maxValue={maxPrice}
               minValue={minPrice}
               value={price}
