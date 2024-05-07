@@ -26,6 +26,7 @@
     "react": "^18",
     "react-dom": "^18",
     "redis": "^4.6.13",
+    "swiper": "^11.1.1",
     "use-debounce": "^10.0.0"
   },
   "devDependencies": {
