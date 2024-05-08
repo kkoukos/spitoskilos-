@@ -18,7 +18,7 @@ export default function Login() {
             {" "}
             <h1 className="font-bold text-2xl text-center">Welcome back!</h1>
             <h2>
-              Don't have an account yet?
+              Don&apos;t have an account yet?
               <Link href="/signup" underline="always" color="primary">
                 Register.
               </Link>
