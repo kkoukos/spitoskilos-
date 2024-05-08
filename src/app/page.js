@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import NavBar from "../components/NavBar";
 import SearchFull from "../components/SearchFull";
+import baseAuth from "./lib/auth";
 
 export default function Home() {
   return (
