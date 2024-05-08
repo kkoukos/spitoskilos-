@@ -11,7 +11,7 @@ export default function SignUp() {
   return (
     <div className="flex items-center  w-full h-screen text-primary-text justify-center bg-login-back  bg-center bg-cover bg-no-repeat ">
       <div className=" w-2/5 h-full items-center justify-center flex flex-col ">
-        <div className="min-w-32 border h-4/5 min-h-32 text-black  w-3/5 flex flex-col items-center justify-center bg-white gap16">
+        <div className="min-w-32 border h-4/5 min-h-32 text-black  w-3/5 flex flex-col items-center justify-center bg-white gap16 rounded-xl">
           <LogoBlue />
           <div className="w-1/2 flex items-center flex flex-col">
             {" "}
@@ -90,9 +90,9 @@ export default function SignUp() {
             </div>
             <Button
               type="submit"
-              radius="sm"
+              radius="full"
               className=" text-white font-bold"
-              color="success"
+              color="primary"
               startContent={<Lock />}
             >
               Sign Up

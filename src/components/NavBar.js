@@ -19,7 +19,7 @@ export default function NavBar() {
           <div className=" py-4 cursor-pointer border-transparent border-b-4 hover:border-primary-text ">
             CONTACT US
           </div>
-          <a href="/signup">
+          <a href="/login">
             <div className="border-2 p-2 rounded-lg hover:bg-white hover:text-slate-500 duration-500 cursor-pointer">
               LOG IN/ REGISTER
             </div>
