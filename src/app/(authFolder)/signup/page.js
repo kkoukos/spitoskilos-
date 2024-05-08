@@ -7,11 +7,7 @@ import LogoBlue from "../../../components/LogoBlue";
 import { Button, Input, Link } from "@nextui-org/react";
 import { AlternateEmail, LocalPhone, Lock } from "@mui/icons-material";
 
-export async function signup(formData) {}
-
 export default function SignUp() {
-  useEffect(() => {}), [];
-
   return (
     <div className="flex items-center  w-full h-screen text-primary-text justify-center bg-login-back  bg-center bg-cover bg-no-repeat ">
       <div className=" w-2/5 h-full items-center justify-center flex flex-col ">
@@ -30,10 +26,7 @@ export default function SignUp() {
             </h2>
           </div>
 
-          <form
-            action={signup}
-            className="h-3/4 justify-evenly flex-col flex w-4/5"
-          >
+          <form className="h-3/4 justify-evenly flex-col flex w-4/5">
             <div>
               <Input
                 label="Name"
