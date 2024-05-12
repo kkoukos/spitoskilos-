@@ -11,7 +11,7 @@ export default function Login() {
   return (
     <div className="flex items-center  w-full h-screen text-primary-text justify-center bg-login-back  bg-center bg-cover bg-no-repeat ">
       <div className=" w-2/5 h-full items-center justify-center flex flex-col ">
-        <div className="min-w-32 border h-2/5 min-h-32 text-black  w-1/2 flex flex-col items-center justify-center bg-white gap-8 rounded-xl py-16">
+        <div className="min-w-[30rem] border h-2/5 min-h-[36rem] text-black  w-1/2 flex flex-col items-center justify-center bg-white gap-8 rounded-xl py-16">
           <LogoBlue />
 
           <div className="w-1/2 flex items-center flex flex-col">
