@@ -2,12 +2,34 @@
 
 import Image from "next/image";
 
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import LogoBlue from "../../../components/LogoBlue";
-import { Button, Input, Link } from "@nextui-org/react";
-import { AlternateEmail, LocalPhone, Lock } from "@mui/icons-material";
+import { Button, Input, Link, user } from "@nextui-org/react";
+import { useState } from "react";
 
 export default function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const router = useRouter();
+
+  async function handleLogIn(event) {
+    event.preventDefault();
+
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
+    console.log(response.json());
+    const headers = response.headers;
+    const cookies = headers.get("Set-Cookie");
+    console.log(cookies);
+  }
+
   return (
     <div className="flex items-center  w-full h-screen text-primary-text justify-center bg-login-back  bg-center bg-cover bg-no-repeat ">
       <div className=" w-2/5 h-full items-center justify-center flex flex-col ">
@@ -25,7 +47,10 @@ export default function Login() {
             </h2>
           </div>
 
-          <form className="h-3/4 justify-evenly flex-col flex w-3/5 mb-6 ">
+          <form
+            className="h-3/4 justify-evenly flex-col flex w-3/5 mb-6 "
+            onSubmit={handleLogIn}
+          >
             <div>
               <Input
                 label="Username/Email"
@@ -35,6 +60,7 @@ export default function Login() {
                 size="lg"
                 isInvalid={false}
                 errorMessage="test"
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div>
@@ -46,6 +72,7 @@ export default function Login() {
                 size="lg"
                 isInvalid={false}
                 errorMessage="test"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 

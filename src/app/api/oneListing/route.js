@@ -5,8 +5,6 @@ export async function POST(req) {
   try {
     const { id } = await req.json();
 
-    console.log(req.body);
-
     const client = await clientPromise;
     const db = client.db("listings");
     console.log("Connected to MongoDB.");

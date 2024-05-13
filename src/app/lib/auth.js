@@ -1,11 +1,15 @@
 // import { cookies } from "next/headers";
 
-function baseAuth() {
-  const secret = "alehxs";
+import { user } from "@nextui-org/react";
 
-  const key = new TextEncoder().encode(secret);
+export function signIn(username, password) {
+  // const secret = "alehxs";
 
-  console.log(key);
+  // const key = new TextEncoder().encode(secret);
+  let result = false;
+  if (username === "kostas") {
+    result = true;
+  }
+
+  return result;
 }
-
-export default baseAuth;
