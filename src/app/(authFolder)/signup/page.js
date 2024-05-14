@@ -2,12 +2,46 @@
 
 import Image from "next/image";
 
-import { useEffect } from "react";
+import { useState } from "react";
 import LogoBlue from "../../../components/LogoBlue";
 import { Button, Input, Link } from "@nextui-org/react";
 import { AlternateEmail, LocalPhone, Lock } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
+
+  async function handleSignUp(event) {
+    setLoading(true);
+    event.preventDefault();
+
+    const response = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name,
+        username: username,
+        password: password,
+        email: email,
+        phone: phone,
+      }),
+    });
+
+    response.json().then((data) => {
+      const success = data.success;
+      if (success) {
+        router.push("/");
+      }
+    });
+  }
+
   return (
     <div className="flex items-center  w-full h-screen text-primary-text justify-center bg-login-back  bg-center bg-cover bg-no-repeat ">
       <div className=" w-2/5 h-full items-center justify-center flex flex-col ">
@@ -26,7 +60,10 @@ export default function SignUp() {
             </h2>
           </div>
 
-          <form className="h-3/4 justify-evenly flex-col flex w-4/5">
+          <form
+            className="h-3/4 justify-evenly flex-col flex w-4/5"
+            onSubmit={handleSignUp}
+          >
             <div>
               <Input
                 label="Name"
@@ -37,6 +74,7 @@ export default function SignUp() {
                 size="lg"
                 isInvalid={false}
                 errorMessage="test"
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div>
@@ -49,6 +87,7 @@ export default function SignUp() {
                 size="lg"
                 isInvalid={false}
                 errorMessage="test"
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div>
@@ -61,6 +100,7 @@ export default function SignUp() {
                 size="lg"
                 isInvalid={false}
                 errorMessage="test"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div>
@@ -73,6 +113,7 @@ export default function SignUp() {
                 variant="faded"
                 size="lg"
                 errorMessage=""
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -86,6 +127,7 @@ export default function SignUp() {
                 inputMode="numeric"
                 isInvalid={false}
                 errorMessage="test"
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
             <Button
@@ -93,7 +135,8 @@ export default function SignUp() {
               radius="full"
               className=" text-white font-bold"
               color="primary"
-              startContent={<Lock />}
+              startContent={!loading && <Lock />}
+              isLoading={loading}
             >
               Sign Up
             </Button>

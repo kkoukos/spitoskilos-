@@ -10,10 +10,12 @@ import { useState } from "react";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
   async function handleLogIn(event) {
+    setLoading(true);
     event.preventDefault();
 
     const response = await fetch("/api/auth/login", {
@@ -24,10 +26,12 @@ export default function Login() {
         password: password,
       }),
     });
-    console.log(response.json());
-    const headers = response.headers;
-    const cookies = headers.get("Set-Cookie");
-    console.log(cookies);
+    response.json().then((data) => {
+      const success = data.success;
+      if (success) {
+        router.push("/");
+      }
+    });
   }
 
   return (
@@ -81,6 +85,7 @@ export default function Login() {
               radius="full"
               className=" text-white font-bold mt-6 text-lg"
               color="primary"
+              isLoading={loading}
             >
               LogIn
             </Button>

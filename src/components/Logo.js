@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 
 import LogoTxt from "../../public/spitoskilos_logo_txt.png";
 import LogoImg from "../../public/spitoskilos_logo_img_white.svg";
