@@ -86,13 +86,13 @@ export default function Login() {
               />
             </div>
 
-            <p className="mt-4 text-red-600">
+            <p className="mt-6 text-red-600">
               &nbsp; {errorMess && "Wrong username/email or password"}{" "}
             </p>
             <Button
               type="submit"
               radius="full"
-              className=" text-white font-bold mt-6 text-lg"
+              className=" text-white font-bold mt-4 text-lg"
               color="primary"
               isLoading={loading}
             >
