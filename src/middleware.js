@@ -16,7 +16,7 @@ export default async function middleware(req) {
 
   // 3. Decrypt the session from the cookie
   const sessionCookie = cookies().get("session")?.value;
-  console.log(sessionCookie);
+
   if (isCredRoute && sessionCookie) {
     return NextResponse.redirect(`${req.nextUrl.origin}/`);
   }

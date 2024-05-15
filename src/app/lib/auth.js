@@ -2,6 +2,8 @@
 import { MongoClient } from "mongodb";
 import crypto from "crypto";
 import { user } from "@nextui-org/react";
+import { cookies } from "next/headers";
+import { Session } from "inspector";
 
 export async function signIn(username, password) {
   // const secret = "alehxs";
@@ -39,6 +41,17 @@ export async function signIn(username, password) {
   } catch (error) {
     return error;
   }
+}
+
+export async function logOut() {
+  const session = cookies().get("session");
+  if (session) {
+    cookies().delete("session");
+    console.log("deleted session");
+    return { success: true, message: "user  logged out" };
+  }
+
+  return { success: false, message: "user not logged out" };
 }
 
 export async function signUp(name, username, password, email, phone) {

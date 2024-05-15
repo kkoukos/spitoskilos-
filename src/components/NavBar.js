@@ -4,8 +4,7 @@ import LogoTxt from "../../public/spitoskilos_logo_txt.png";
 import LogoImg from "../../public/spitoskilos_logo_img.svg";
 import Logo from "./Logo";
 import { cookies } from "next/headers";
-import { ExitToApp } from "@mui/icons-material";
-import { Button } from "@nextui-org/react";
+import LogOutButton from "./LogOutButton";
 
 export default async function NavBar() {
   const sessionCookie = await cookies().get("session")?.value;
@@ -19,8 +18,6 @@ export default async function NavBar() {
 
     loggedIn = true;
   }
-
-  function handleLogOut() {}
 
   return (
     <div className="w-full flex flex-col items-center pt-4 z-50 fixed text-primary-text">
@@ -48,9 +45,7 @@ export default async function NavBar() {
               <div className="border-2 p-2 rounded-lg hover:bg-white hover:text-slate-500 duration-500 cursor-pointer">
                 {user.username}
               </div>
-              <Button isIconOnly color="danger" aria-label="Like">
-                <ExitToApp />
-              </Button>
+              <LogOutButton />
             </>
           )}
         </div>

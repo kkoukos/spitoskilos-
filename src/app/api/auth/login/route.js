@@ -28,7 +28,10 @@ export async function POST(req, res) {
       console.log("bad creds");
     }
 
-    return Response.json({ success: false });
+    return Response.json({
+      success: false,
+      message: "Wrong username/email or password",
+    });
   } catch (error) {
     console.log(error);
 

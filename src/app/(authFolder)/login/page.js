@@ -11,6 +11,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMess, setErrorMess] = useState(false);
 
   const router = useRouter();
 
@@ -30,6 +31,9 @@ export default function Login() {
       const success = data.success;
       if (success) {
         router.push("/");
+      } else {
+        setErrorMess(true);
+        setLoading(false);
       }
     });
   }
@@ -62,9 +66,10 @@ export default function Login() {
                 labelPlacement="outside"
                 variant="faded"
                 size="lg"
-                isInvalid={false}
-                errorMessage="test"
-                onChange={(e) => setUsername(e.target.value)}
+                isInvalid={errorMess}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
               />
             </div>
             <div>
@@ -74,12 +79,16 @@ export default function Login() {
                 labelPlacement="outside"
                 variant="faded"
                 size="lg"
-                isInvalid={false}
-                errorMessage="test"
-                onChange={(e) => setPassword(e.target.value)}
+                isInvalid={errorMess}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
             </div>
 
+            <p className="mt-4 text-red-600">
+              &nbsp; {errorMess && "Wrong username/email or password"}{" "}
+            </p>
             <Button
               type="submit"
               radius="full"
