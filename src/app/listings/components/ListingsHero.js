@@ -26,6 +26,9 @@ export default function ListingsHero({ children }) {
   const [markersList, setMarkersList] = useState([]); // State to store latLngList
 
   const [name, setName] = useState(searchParams.get("name") || "location");
+  const [category, setCategory] = useState(
+    searchParams.get("category") || "House"
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +39,7 @@ export default function ListingsHero({ children }) {
         setListings(tempListings);
         setFilteredListings(tempListings);
         // Map through listings to create latLngList
-        console.log(listings);
+
         setLoading(false);
       } catch (error) {
         console.log("Error fetching data:", error);
@@ -49,7 +52,6 @@ export default function ListingsHero({ children }) {
       lat: latitude,
       lng: longitude,
     }));
-    console.log(tempMarkers);
 
     setMarkersList(tempMarkers);
   }, [filteredListings]);
@@ -62,6 +64,7 @@ export default function ListingsHero({ children }) {
           listings={listings}
           filteredListings={filteredListings}
           setFilteredListings={setFilteredListings}
+          category_temp={category}
         ></Filters>
 
         <PropertyDisplay

@@ -32,6 +32,7 @@ export async function signIn(username, password) {
         _id: existingUser._id,
         name: existingUser.name,
         username: existingUser.username,
+        type: existingUser.type || 0,
       };
 
       return { success: true, message: user }; // Password is correct
@@ -69,6 +70,7 @@ export async function signUp(name, username, password, email, phone) {
 
     const existingUser = await db.collection("users").findOne({ username });
     if (existingUser) {
+      console.log("User exists");
       return { success: false, result: "Username already exists." };
     }
 
@@ -81,6 +83,7 @@ export async function signUp(name, username, password, email, phone) {
       password, // Note: Password should be hashed before storing in a real application
       email,
       phone,
+      type: 0,
     };
 
     // Insert the new user document into the users collection

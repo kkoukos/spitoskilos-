@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import LogoBlue from "../../../components/LogoBlue";
 import { Button, Input, Link } from "@nextui-org/react";
 import { AlternateEmail, LocalPhone, Lock } from "@mui/icons-material";
@@ -15,6 +15,50 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [userExists, setUserExists] = useState(false);
+
+  const validateEmail = (email) =>
+    email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
+
+  const emailIsInvalid = useMemo(() => {
+    if (email === "") return false;
+
+    return validateEmail(email) ? false : true;
+  }, [email]);
+
+  const validateUsername = (username) => /^[a-zA-Z0-9]{7,30}$/.test(username);
+
+  const usernameIsInvalid = useMemo(() => {
+    if (username === "") return false;
+
+    return validateUsername(username) ? false : true;
+  }, [username]);
+
+  const validateName = (name) =>
+    /^[a-zA-Z]+(?:\s[a-zA-Z]+)?(?:\s[a-zA-Z]+)?$/.test(name); // Only alphabetic characters with at most one whitespace
+
+  const nameIsInvalid = useMemo(() => {
+    if (name === "") return false;
+
+    return validateName(name) ? false : true;
+  }, [name]);
+
+  const validatePassword = (password) =>
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,30}$/.test(password);
+
+  const passwordIsInvalid = useMemo(() => {
+    if (password === "") return false;
+
+    return validatePassword(password) ? false : true;
+  }, [password]);
+
+  const validatePhoneNumber = (phone) => /^[0-9]{8,15}$/.test(phone);
+
+  const phoneNumberIsInvalid = useMemo(() => {
+    if (phone === "") return false;
+
+    return validatePhoneNumber(phone) ? false : true;
+  }, [phone]);
 
   const router = useRouter();
 
@@ -38,6 +82,9 @@ export default function SignUp() {
       const success = data.success;
       if (success) {
         router.push("/");
+      } else {
+        setUserExists(true);
+        setLoading(false);
       }
     });
   }
@@ -72,8 +119,8 @@ export default function SignUp() {
                 placeholder="Enter your full name."
                 variant="faded"
                 size="lg"
-                isInvalid={false}
-                errorMessage="test"
+                isInvalid={nameIsInvalid}
+                errorMessage="Name should be only alphabetic characters with only 2 whitespaces."
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
@@ -85,9 +132,12 @@ export default function SignUp() {
                 placeholder="Enter your username."
                 variant="faded"
                 size="lg"
-                isInvalid={false}
-                errorMessage="test"
-                onChange={(e) => setUsername(e.target.value)}
+                errorMessage="Username should be longer than 6 characters and only consists of alphanumeric characters."
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  setUserExists(false);
+                }}
+                isInvalid={usernameIsInvalid}
               />
             </div>
             <div>
@@ -98,8 +148,8 @@ export default function SignUp() {
                 labelPlacement="outside"
                 variant="faded"
                 size="lg"
-                isInvalid={false}
-                errorMessage="test"
+                isInvalid={passwordIsInvalid}
+                errorMessage="Password must contain at least one uppercase letter, one lowercase letter, one numeric digit, and be between 8 and 30 characters long"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
@@ -112,7 +162,8 @@ export default function SignUp() {
                 startContent={<AlternateEmail />}
                 variant="faded"
                 size="lg"
-                errorMessage=""
+                isInvalid={emailIsInvalid}
+                errorMessage="Email is invalid."
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -125,11 +176,15 @@ export default function SignUp() {
                 variant="faded"
                 size="lg"
                 inputMode="numeric"
-                isInvalid={false}
-                errorMessage="test"
+                isInvalid={phoneNumberIsInvalid}
+                errorMessage="Phone number must contain only numeric characters and be between 8 and 15 digits long"
                 onChange={(e) => setPhone(e.target.value)}
+                maxLength={10}
               />
             </div>
+            <p className="mt-4 text-red-600">
+              &nbsp; {userExists && <center>Username already exists.</center>}
+            </p>
             <Button
               type="submit"
               radius="full"

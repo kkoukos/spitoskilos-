@@ -27,7 +27,7 @@ export async function POST(req, res) {
       });
     }
 
-    return Response.json({ success: result });
+    return Response.json({ success: success });
   } catch (error) {
     console.log(error);
 

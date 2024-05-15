@@ -49,10 +49,8 @@ export default function SearchFull() {
       setPredictions([]);
       if (text.length > 5) {
         try {
-          console.log(text);
           const data = await PlaceConnector(text);
           setPredictions(data.suggestions);
-          console.log(data.suggestions);
         } catch (error) {
           console.error("Error in place api:", error);
           // Handle error
@@ -62,16 +60,15 @@ export default function SearchFull() {
   };
 
   const handleLocationClick = async (event) => {
-    console.log(event.target.innerText);
     const key = event.target.getAttribute("data-key"); // inputText = event.id;
-    console.log(key);
+
     setPlaceId(key);
     setInputText(event.target.innerText);
     setPredictions(false);
   };
   const handleCatClick = async (event) => {
     const key = event.target.getAttribute("data-key"); // inputText = event.id;
-    console.log(key);
+
     setCategory(key);
 
     setDropdownCat(false);
@@ -98,7 +95,9 @@ export default function SearchFull() {
       if (response.ok) {
         const { lat, lon } = await response.json();
 
-        router.push(`/listings?lat=${lat}&lng=${lon}&name=${inputText}`);
+        router.push(
+          `/listings?lat=${lat}&lng=${lon}&name=${inputText}&category=${category}`
+        );
       } else {
         console.log(response.statusText);
       }

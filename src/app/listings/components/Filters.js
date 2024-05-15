@@ -6,17 +6,22 @@ import { Slider } from "@nextui-org/react";
 import React from "react";
 import Image from "next/image";
 import { Dvr, Map, Tune } from "@mui/icons-material";
+import { useSearchParams } from "next/navigation";
 
 export default function Filters({
   listings,
   filteredListings,
   setFilteredListings,
+  category_temp,
 }) {
   const [type, setType] = React.useState();
 
   const [subCategory, setSubCategory] = React.useState(new Set());
 
-  const [category, setCategory] = React.useState("");
+  const [category, setCategory] = React.useState(
+    new Set([category_temp]) || ""
+  );
+  console.log(category);
 
   const [price, setPrice] = React.useState([100, 300]);
   const [minPrice, setMinPrice] = React.useState(0);
