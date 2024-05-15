@@ -69,6 +69,7 @@ export default function Login() {
                 isInvalid={errorMess}
                 onChange={(e) => {
                   setUsername(e.target.value);
+                  setErrorMess(false);
                 }}
               />
             </div>
@@ -82,17 +83,18 @@ export default function Login() {
                 isInvalid={errorMess}
                 onChange={(e) => {
                   setPassword(e.target.value);
+                  setErrorMess(false);
                 }}
               />
             </div>
 
-            <p className="mt-6 text-red-600">
+            <p className="mt-4 text-red-600">
               &nbsp; {errorMess && "Wrong username/email or password"}{" "}
             </p>
             <Button
               type="submit"
               radius="full"
-              className=" text-white font-bold mt-4 text-lg"
+              className=" text-white font-bold mt-2 text-lg"
               color="primary"
               isLoading={loading}
             >
