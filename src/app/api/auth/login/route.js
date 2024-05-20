@@ -9,11 +9,12 @@ export async function POST(req, res) {
     const { username, password } = await req.json();
 
     const { success, message } = await signIn(username, password);
+
     // console.log(cookies().get("session"));
 
     if (success) {
       const session = JSON.stringify(message);
-      console.log(message);
+
       cookies().set("session", session, {
         httpOnly: true,
         path: "/",

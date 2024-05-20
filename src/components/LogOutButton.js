@@ -24,7 +24,7 @@ export default async function LogOutButton() {
   }
   return (
     <form onSubmit={handleLogOut}>
-      <Button isIconOnly color="danger" type="submit">
+      <Button isIconOnly color="danger" type="submit" size="sm">
         <ExitToApp />
       </Button>
     </form>
