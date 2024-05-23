@@ -4,24 +4,11 @@ import LogoTxt from "../../public/spitoskilos_logo_txt.png";
 import LogoImg from "../../public/spitoskilos_logo_img.svg";
 import { Favorite, HolidayVillage, Person } from "@mui/icons-material";
 import Logo from "./Logo";
-import { cookies } from "next/headers";
 import LogOutButton from "./LogOutButton";
 import { Avatar, Navbar } from "@nextui-org/react";
 import NavBarSelect from "./NavBarSelect";
 
-export default async function NavBarSide() {
-  const sessionCookie = await cookies().get("session")?.value;
-
-  let loggedIn = false;
-  let user = { _id: "", name: "", username: "" };
-  if (sessionCookie === undefined) {
-    loggedIn = false;
-  } else {
-    user = JSON.parse(sessionCookie);
-
-    loggedIn = true;
-  }
-
+export default async function NavBarSide({ user }) {
   return (
     <div className="flex items-center justify-center h-full bg-[#14293A] text-primary-text w-1/5  max-w-64 border-r-1 border-gray-700">
       <div className="flex flex-col justify-between items-center h-[91.5%]">

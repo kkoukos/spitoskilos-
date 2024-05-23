@@ -13,9 +13,10 @@ export default function Filters({
   filteredListings,
   setFilteredListings,
   category_temp,
+  type_temp,
 }) {
-  const [type, setType] = React.useState();
-
+  const [type, setType] = React.useState(type_temp || "buy");
+  console.log(type);
   const [subCategory, setSubCategory] = React.useState(new Set());
 
   const [category, setCategory] = React.useState(
@@ -46,6 +47,8 @@ export default function Filters({
       setPrice([0, maxPrice]);
     }
   }, [listings]);
+
+  const type_options = ["Buy", "Rent"];
 
   const sub_categories_houses = [
     "Apartment",
@@ -104,15 +107,14 @@ export default function Filters({
               variant="bordered"
               color="primary"
               defaultSelectedKeys={["buy"]}
-              // selectedKeys={[type]}
-              onSelectionChange={handleTypeChange}
+              selectedKeys={[type]}
+              onSelectionChange={setType}
             >
-              <SelectItem value={"buy"} key={"buy"}>
-                BUY
-              </SelectItem>
-              <SelectItem value={"rent"} key={"rent"}>
-                RENT
-              </SelectItem>
+              {type_options.map((ttype) => (
+                <SelectItem key={ttype} value={ttype}>
+                  {ttype}
+                </SelectItem>
+              ))}
             </Select>
 
             <Select

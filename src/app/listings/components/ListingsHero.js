@@ -17,10 +17,12 @@ export default function ListingsHero({ children }) {
   const searchParams = useSearchParams();
   const [lat, setLat] = useState(30);
   const [lng, setLng] = useState(30);
+  const [type, setType] = useState("Buy");
 
   useEffect(() => {
     setLat(searchParams.get("lat"));
     setLng(searchParams.get("lng"));
+    setType(searchParams.get("type"));
   }, [searchParams]);
 
   const [markersList, setMarkersList] = useState([]); // State to store latLngList
@@ -65,6 +67,7 @@ export default function ListingsHero({ children }) {
           filteredListings={filteredListings}
           setFilteredListings={setFilteredListings}
           category_temp={category}
+          type_temp={type}
         ></Filters>
 
         <PropertyDisplay

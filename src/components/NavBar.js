@@ -21,7 +21,7 @@ export default async function NavBar() {
 
   return (
     <div className="w-full flex flex-col items-center pt-4 z-50 fixed text-primary-text">
-      <div className="flex backdrop-blur-xl justify-between w-11/12 rounded-md p-5">
+      <div className="flex backdrop-blur-xl justify-between w-11/12 rounded-lg p-5">
         <Logo></Logo>
         <div className="flex w-4/12 h-18 items-center justify-end gap-10">
           <div className="py-4 cursor-pointer  border-transparent border-b-4 hover:border-primary-text">
@@ -42,9 +42,12 @@ export default async function NavBar() {
           )}
           {loggedIn && (
             <>
-              <div className="border-2 p-2 rounded-lg hover:bg-white hover:text-slate-500 duration-500 cursor-pointer">
-                {user.username}
-              </div>
+              <a href="/dashboard">
+                <div className="border-2 p-2 rounded-lg hover:bg-white hover:text-slate-500 duration-500 cursor-pointer">
+                  {user.username}
+                </div>
+              </a>
+
               <LogOutButton />
             </>
           )}

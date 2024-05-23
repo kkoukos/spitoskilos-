@@ -32,7 +32,10 @@ export async function signIn(username, password) {
         _id: existingUser._id,
         name: existingUser.name,
         username: existingUser.username,
+        email: existingUser.email,
+        phone: existingUser.phone,
         type: existingUser.type || 0,
+        profile_picture: "",
       };
 
       return { success: true, message: user }; // Password is correct
@@ -84,6 +87,7 @@ export async function signUp(name, username, password, email, phone) {
       email,
       phone,
       type: 0,
+      profile_picture: "",
     };
 
     // Insert the new user document into the users collection

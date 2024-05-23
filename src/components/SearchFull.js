@@ -19,7 +19,7 @@ const spartan_light = League_Spartan({
   weight: ["300"],
 });
 
-export default function SearchFull() {
+export default function SearchFull({ type }) {
   const router = useRouter();
   const [inputText, setInputText] = useState("");
   const [predictions, setPredictions] = useState([]);
@@ -78,6 +78,10 @@ export default function SearchFull() {
     if (placeId == null) {
       return console.log("null search");
     }
+    let str_type = "Buy";
+    if (type === 0) {
+      str_type = "Rent";
+    }
 
     const data = {
       placesId: placeId,
@@ -96,7 +100,7 @@ export default function SearchFull() {
         const { lat, lon } = await response.json();
 
         router.push(
-          `/listings?lat=${lat}&lng=${lon}&name=${inputText}&category=${category}`
+          `/listings?lat=${lat}&lng=${lon}&name=${inputText}&category=${category}&type=${str_type}`
         );
       } else {
         console.log(response.statusText);
@@ -229,7 +233,7 @@ export default function SearchFull() {
       </div>
       <div className="w-3/12 flex justify-end items-center">
         <div
-          className=" py-4 pr-8 pl-5 bg-blue-500 rounded-lg text-white text-lg gap-2 cursor-pointer hover:bg-blue-600 duration-500"
+          className=" py-4 pr-8 pl-5 bg-[#224561] rounded-lg text-white text-lg gap-2 cursor-pointer hover:bg-[#14293A] duration-500"
           onClick={handelSearchButton}
         >
           <Search></Search> SEARCH
