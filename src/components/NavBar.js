@@ -42,9 +42,12 @@ export default async function NavBar() {
           )}
           {loggedIn && (
             <>
-              <div className="border-2 p-2 rounded-lg hover:bg-white hover:text-slate-500 duration-500 cursor-pointer">
-                {user.username}
-              </div>
+              <a href="/dashboard">
+                <div className="border-2 p-2 rounded-lg hover:bg-white hover:text-slate-500 duration-500 cursor-pointer">
+                  {user.username}
+                </div>
+              </a>
+
               <LogOutButton />
             </>
           )}

@@ -33,6 +33,7 @@ export async function signIn(username, password) {
         name: existingUser.name,
         username: existingUser.username,
         type: existingUser.type || 0,
+        profile_picture: "",
       };
 
       return { success: true, message: user }; // Password is correct
