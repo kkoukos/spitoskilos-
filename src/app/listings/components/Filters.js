@@ -15,14 +15,13 @@ export default function Filters({
   category_temp,
   type_temp,
 }) {
-  const [type, setType] = React.useState(type_temp || "buy");
-  console.log(type);
+  const [type, setType] = React.useState(new Set([type_temp]) || "");
+
   const [subCategory, setSubCategory] = React.useState(new Set());
 
   const [category, setCategory] = React.useState(
     new Set([category_temp]) || ""
   );
-  console.log(category);
 
   const [price, setPrice] = React.useState([100, 300]);
   const [minPrice, setMinPrice] = React.useState(0);
@@ -72,10 +71,6 @@ export default function Filters({
     "6th Floor+",
   ];
 
-  const handleTypeChange = (e) => {
-    setType(e.target.value);
-  };
-
   React.useEffect(() => {
     let templist = listings;
 
@@ -106,8 +101,7 @@ export default function Filters({
               className="max-w-52"
               variant="bordered"
               color="primary"
-              defaultSelectedKeys={["buy"]}
-              selectedKeys={[type]}
+              selectedKeys={type}
               onSelectionChange={setType}
             >
               {type_options.map((ttype) => (
