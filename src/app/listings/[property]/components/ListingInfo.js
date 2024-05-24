@@ -10,16 +10,14 @@ import "swiper/css/bundle";
 import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
 import BathtubOutlinedIcon from "@mui/icons-material/BathtubOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import PlaylistAddCheckOutlinedIcon from "@mui/icons-material/PlaylistAddCheckOutlined";
 
 export default function ListingsInfo({ params }) {
   SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
 
-  const imageUrls = [
-    "https://m1.spitogatos.gr/272372880_1600x1200.jpg",
-    "https://m3.spitogatos.gr/274176806_300x220.jpg",
-    "https://m2.spitogatos.gr/274176811_900x675.jpg",
-  ];
+  const imageUrls = [];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,9 +40,14 @@ export default function ListingsInfo({ params }) {
 
     fetchData(); // Call fetchData function when component mounts
   }, []); // Empty dependency array ensures useEffect runs only once
+
+  const addToFavorites = async () => {
+    console.log("Saving to favorites:", listing);
+  };
+
   return (
     <>
-      <div className="relative max-w-full ">
+      <div className="relative max-w-full">
         <Swiper navigation className="h-96 max-w-full mx-auto">
           {listing
             ? listing.pictures.map((url) => (
@@ -94,17 +97,25 @@ export default function ListingsInfo({ params }) {
                 {listing?.description}
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex flex-col items-center justify-between">
+              <button
+                onClick={addToFavorites}
+                class="bg-transparent hover:bg-gray-300 text-gray-700 py-2 px-4 border border-gray-500 rounded"
+              >
+                <PlaylistAddCheckOutlinedIcon className="mr-2" />
+                Save to Favorites
+              </button>
               <div className="text-xl font-semibold text-gray-900">
                 <LocalPhoneOutlinedIcon className="mb-1 mr-2 text-md" />
-                +30 6938904850
+                {/* +30 6938904850 */}
+                {listing?.phoneNumber}
                 <a
                   // href={`tel:${listing?.phoneNumber}`}
 
                   href="+30 6938904850"
                   className="text-blue-500 underline mt-4 block"
                 >
-                  {listing?.phoneNumber}
+                  {/* {listing?.phoneNumber} */}
                 </a>
               </div>
             </div>
