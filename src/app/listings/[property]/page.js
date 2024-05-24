@@ -46,7 +46,7 @@ export default function Page({ params }) {
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Loading..</div>}>
         <NavBar></NavBar>
 
         <div className="relative max-w-full ">
