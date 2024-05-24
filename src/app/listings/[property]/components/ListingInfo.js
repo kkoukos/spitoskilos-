@@ -46,17 +46,29 @@ export default function ListingsInfo({ params }) {
     <>
       <div className="relative max-w-full ">
         <Swiper navigation className="h-96 max-w-full mx-auto">
-          {imageUrls.map((url) => (
-            <SwiperSlide key={url}>
-              <div
-                className="h-full w-full"
-                style={{
-                  background: `url(${url}) center no-repeat`,
-                  backgroundSize: "cover",
-                }}
-              ></div>
-            </SwiperSlide>
-          ))}
+          {listing
+            ? listing.pictures.map((url) => (
+                <SwiperSlide key={url}>
+                  <div
+                    className="h-full w-full"
+                    style={{
+                      background: `url(${url}) center no-repeat`,
+                      backgroundSize: "cover",
+                    }}
+                  ></div>
+                </SwiperSlide>
+              ))
+            : imageUrls.map((url) => (
+                <SwiperSlide key={url}>
+                  <div
+                    className="h-full w-full"
+                    style={{
+                      background: `url(${url}) center no-repeat`,
+                      backgroundSize: "cover",
+                    }}
+                  ></div>
+                </SwiperSlide>
+              ))}
         </Swiper>
       </div>
 
