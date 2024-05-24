@@ -1,9 +1,10 @@
 "use server";
 import { cookies } from "next/headers";
 
-import MainPanel from "./components/MainPanel";
-import NavBarSide from "../../components/NavBarSide";
+import DashboardMain from "./components/DashboardMain";
+
 export default async function Home() {
+  let view = "1";
   const sessionCookie = await cookies().get("session")?.value;
   let loggedIn = false;
   let user = { _id: "", name: "", username: "" };
@@ -16,8 +17,7 @@ export default async function Home() {
   }
   return (
     <div className="w-screen h-screen flex">
-      <NavBarSide user={user}></NavBarSide>
-      <MainPanel user={user}></MainPanel>
+      <DashboardMain user={user}></DashboardMain>
     </div>
   );
 }
