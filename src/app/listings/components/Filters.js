@@ -15,12 +15,15 @@ export default function Filters({
   category_temp,
   type_temp,
 }) {
-  const [type, setType] = React.useState(new Set([type_temp]) || "");
+  const [type, setType] = React.useState(
+    new Set([type_temp.toLowerCase()]) || ""
+  );
 
+  console.log(type_temp);
   const [subCategory, setSubCategory] = React.useState(new Set());
 
   const [category, setCategory] = React.useState(
-    new Set([category_temp]) || ""
+    new Set([category_temp.toLowerCase()]) || ""
   );
 
   const [price, setPrice] = React.useState([100, 300]);
@@ -74,11 +77,21 @@ export default function Filters({
   React.useEffect(() => {
     let templist = listings;
 
-    // Checking if subCategory Set is empty
+    templist = templist.filter((listing) =>
+      type.has(listing.type.toLowerCase())
+    );
+
+    // if (category.size !== 0) {  uncomment when db is cleared of bad data
+    //   templist = templist.filter(
+    //     (listing) =>
+    //       listing.propertyMainCategory &&
+    //       category.has(listing.propertyMainCategory.toLowerCase())
+    //   );
+    // }
 
     if (subCategory.size !== 0) {
       templist = templist.filter((listing) =>
-        subCategory.has(listing.propertyCategory)
+        subCategory.has(listing.propertyCategory.toLowerCase())
       );
     }
 
@@ -89,7 +102,7 @@ export default function Filters({
     }
 
     setFilteredListings(templist);
-  }, [category, subCategory, price]);
+  }, [category, subCategory, price, type]);
 
   return (
     <>
@@ -105,7 +118,10 @@ export default function Filters({
               onSelectionChange={setType}
             >
               {type_options.map((ttype) => (
-                <SelectItem key={ttype} value={ttype}>
+                <SelectItem
+                  key={ttype.toLowerCase()}
+                  value={ttype.toLowerCase()}
+                >
                   {ttype}
                 </SelectItem>
               ))}
@@ -120,7 +136,9 @@ export default function Filters({
               onSelectionChange={setCategory}
             >
               {categories.map((tcategory) => (
-                <SelectItem key={tcategory}>{tcategory}</SelectItem>
+                <SelectItem key={tcategory.toLowerCase()}>
+                  {tcategory}
+                </SelectItem>
               ))}
             </Select>
 
@@ -134,7 +152,9 @@ export default function Filters({
               onSelectionChange={setSubCategory}
             >
               {sub_categories_houses.map((tcategory, index) => (
-                <SelectItem key={tcategory}>{tcategory}</SelectItem>
+                <SelectItem key={tcategory.toLowerCase()}>
+                  {tcategory}
+                </SelectItem>
               ))}
             </Select>
 

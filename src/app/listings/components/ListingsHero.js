@@ -15,15 +15,15 @@ export default function ListingsHero({ children }) {
   const [loading, setLoading] = useState(true);
 
   const searchParams = useSearchParams();
-  const [lat, setLat] = useState(30);
-  const [lng, setLng] = useState(30);
-  const [type, setType] = useState("Buy");
+  const [lat, setLat] = useState(searchParams.get("lat") || 30);
+  const [lng, setLng] = useState(searchParams.get("lng") || 30);
+  const [type, setType] = useState(searchParams.get("type") || "Buy");
 
-  useEffect(() => {
-    setLat(searchParams.get("lat"));
-    setLng(searchParams.get("lng"));
-    setType(searchParams.get("type"));
-  }, [searchParams]);
+  // useEffect(() => {
+  //   setLat(searchParams.get("lat"));
+  //   setLng(searchParams.get("lng"));
+  //   setType(searchParams.get("type"));
+  // }, [searchParams]);
 
   const [markersList, setMarkersList] = useState([]); // State to store latLngList
 
