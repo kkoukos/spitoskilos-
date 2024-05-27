@@ -45,7 +45,7 @@ export default async function NavBarSticky() {
                   {user.username}
                 </div>
               </a>
-              <LogOutButton />
+              {/* <LogOutButton /> */}
             </>
           )}
         </div>

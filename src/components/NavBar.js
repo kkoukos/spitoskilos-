@@ -48,7 +48,7 @@ export default async function NavBar() {
                 </div>
               </a>
 
-              <LogOutButton />
+              {/* <LogOutButton /> */}
             </>
           )}
         </div>

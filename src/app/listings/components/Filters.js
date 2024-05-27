@@ -3,7 +3,7 @@
 import { Select, SelectSection, SelectItem } from "@nextui-org/select";
 import { Button, ButtonGroup, Tooltip } from "@nextui-org/react";
 import { Slider } from "@nextui-org/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Dvr, Map, Tune } from "@mui/icons-material";
 import { useSearchParams } from "next/navigation";
@@ -19,7 +19,8 @@ export default function Filters({
     new Set([type_temp.toLowerCase()]) || ""
   );
 
-  console.log(type_temp);
+  const [subCategoryChoices, setSubcategoryChoices] = useState([]);
+
   const [subCategory, setSubCategory] = React.useState(new Set());
 
   const [category, setCategory] = React.useState(
@@ -50,6 +51,19 @@ export default function Filters({
     }
   }, [listings]);
 
+  React.useEffect(() => {
+    console.log(category);
+    if (category.has("house")) {
+      setSubcategoryChoices(sub_categories_houses);
+    }
+    if (category.has("commercial")) {
+      setSubcategoryChoices(sub_categories_commercial);
+    }
+    if (category.has("land")) {
+      setSubcategoryChoices(sub_categories_land);
+    }
+  }, [category]);
+
   const type_options = ["Buy", "Rent"];
 
   const sub_categories_houses = [
@@ -60,7 +74,9 @@ export default function Filters({
     "Building",
     "Other",
   ];
-  const categories = ["House", "Commercial", "Land", "Other"];
+  const sub_categories_commercial = ["Office", "Store", "Warehouse", "Other"];
+  const sub_categories_land = ["Plot", "Other"];
+  const categories = ["House", "Commercial", "Land"];
 
   const floors = [
     "Basement",
@@ -151,7 +167,7 @@ export default function Filters({
               value={subCategory}
               onSelectionChange={setSubCategory}
             >
-              {sub_categories_houses.map((tcategory, index) => (
+              {subCategoryChoices.map((tcategory, index) => (
                 <SelectItem key={tcategory.toLowerCase()}>
                   {tcategory}
                 </SelectItem>
