@@ -15,7 +15,7 @@ export default function NavBarSide({ user, setView, view }) {
         </div>
         <div>
           <div className="flex items-center justify-between  border-1 border-gray-700 rounded-lg p-4 py-2">
-            <Avatar name={user.name}></Avatar>
+            <Avatar name={user.name} src={user.profile_picture}></Avatar>
             <div className=" p-2 rounded-lg ">{user.username}</div>
           </div>
         </div>

@@ -16,7 +16,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function MyProfile({ user }) {
+  const [loadingUpload, setLoadingUpload] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [file, setFile] = useState(null);
+
   const router = useRouter();
 
   function handleEdit() {
@@ -24,8 +27,6 @@ export default function MyProfile({ user }) {
   }
 
   async function handleLogOut() {
-    event.preventDefault();
-
     const response = await fetch("/api/auth/logout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -41,15 +42,47 @@ export default function MyProfile({ user }) {
     });
   }
 
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  async function handleUpload() {
+    setLoadingUpload(true);
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("username", user.username);
+    const response = await fetch("/api/uploadUserPhoto", {
+      method: "POST",
+      body: formData,
+    });
+    console.log(response);
+    response.json().then((data) => {
+      console.log(data);
+      if (data.success) {
+        setLoadingUpload(false);
+        router.refresh();
+      }
+    });
+  }
+
   return (
     <>
       <h1 className="font-bold text-4xl w-[90%] ">My Profile</h1>
       <div className="h-4/5 bg-[#14293A] border-t-1 border-gray-700 w-[90%] flex items-center">
         <div className="w-[40%] h-4/5 flex flex-col items-center gap-6 border-r-1 border-gray-700">
-          <img
-            src={TempPic.src}
-            className="w-3/5 border-1 rounded-xl border-gray-500 "
-          />
+          {user.profile_picture === "" && (
+            <img
+              src={TempPic.src}
+              className="w-3/5 border-1 rounded-xl border-gray-500 "
+            />
+          )}
+          {user.profile_picture !== "" && (
+            <img
+              src={user.profile_picture}
+              className="w-3/5 border-1 rounded-xl border-gray-500 "
+            />
+          )}
+
           <div className="w-3/5 flex justify-between">
             <Button
               isIconOnly
@@ -64,11 +97,14 @@ export default function MyProfile({ user }) {
               variant="ghost"
               size="lg"
               className="w-3/4 text-white hover:text-black"
-              startContent={<Upload />}
+              startContent={!loadingUpload && <Upload />}
+              onPress={handleUpload}
+              isLoading={loadingUpload}
             >
               UPLOAD
             </Button>
           </div>
+          <input type="file" onChange={handleFileChange} />
         </div>
         <div className="w-[60%] h-4/5 flex items-start flex-col gap-6 text-xl justify-between ">
           <div className="ml-5 pl-4 w-4/5 gap-4 flex flex-col border-b-1 border-gray-700 pb-2 ">

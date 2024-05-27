@@ -35,7 +35,7 @@ export async function signIn(username, password) {
         email: existingUser.email,
         phone: existingUser.phone,
         type: existingUser.type || 0,
-        profile_picture: "",
+        profile_picture: existingUser.profile_picture,
       };
 
       return { success: true, message: user }; // Password is correct
