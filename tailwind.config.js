@@ -24,6 +24,9 @@ module.exports = {
         primary: {
           DEFAULT: "#14293A",
         },
+        secondary: {
+          DEFAULT: "#38383d",
+        },
         brand: {
           50: "#E1ECF5",
           100: "#CEDFEE",

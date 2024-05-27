@@ -1,26 +1,32 @@
 import { Delete, Edit } from "@mui/icons-material";
-import { Button } from "@nextui-org/react";
+import { Button, Chip } from "@nextui-org/react";
 
-export default function ListingCard() {
+export default function ListingCard({ listing }) {
   return (
-    <div className="w-full h-44  rounded-xl  border-gray-500 border-1 flex text-white mb-2">
+    <div className="w-full h-44  rounded-xl  border-gray-500 border-1 flex text-white mb-2 hover:bg-[#112536]">
       <div className="w-2/5  flex items-center justify-center">
-        <div className="w-[80%] h-[80%] bg-login-back border-1 border-gray-700 rounded-lg "></div>
+        <img
+          className="w-[80%] h-[80%] border-1 border-gray-700 rounded-lg "
+          src={listing?.pictures[0]}
+        ></img>
       </div>
       <div className="w-3/5 flex flex-col items-center h-full justify-center">
         {" "}
         {/* centers div below */}
         <div className="h-[80%] w-full  text-xl font-bold tracking-wide flex flex-col justify-between">
           <div className="flex flex-col w-[95%] ">
-            <span>Apartment, 90m²</span>
+            <div className="flex items-center  justify-between">
+              {listing?.propertyCategory + ", " + listing?.surface + "m²"}{" "}
+              <Chip size="sm">{listing?.type.toUpperCase()}</Chip>
+            </div>
             <div className="font-normal tracking-tight text-md text-gray-300">
-              Neo Faliro center, Neo Faliro (Piraeus)
+              {listing?.area}
             </div>
           </div>
 
           <div className="w-[95%] flex justify-between ">
             <div className=" tracking-tight text-xl font-semibold">
-              € 296,000
+              € {listing?.price.toLocaleString()}
             </div>
             <div className="flex gap-2">
               <Button isIconOnly color="default" size="sm">
