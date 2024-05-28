@@ -15,6 +15,8 @@ export default function PropertyDisplay({
   lat,
   lng,
   loading,
+  setFavorites,
+  favorites,
 }) {
   // Empty dependency array ensures useEffect runs only once
   return (
@@ -35,7 +37,12 @@ export default function PropertyDisplay({
             // Display spinner while loading
             <>
               <div className="w-[35%] min-w-[35%] ">
-                <ListingsGallery data={filteredListings} name={name} />
+                <ListingsGallery
+                  data={filteredListings}
+                  name={name}
+                  setFavorites={setFavorites}
+                  favorites={favorites}
+                />
               </div>
               <div className="w-full h-full">
                 <Map lat={lat} lng={lng} markers={markersList} />

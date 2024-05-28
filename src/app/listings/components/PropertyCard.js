@@ -1,9 +1,59 @@
 import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
 import BathtubOutlinedIcon from "@mui/icons-material/BathtubOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Button } from "@nextui-org/react";
 
-export default function PropertyCard({ property }) {
+export default function PropertyCard({
+  property,
+  setFavorites,
+  isFavorite,
+  favorites,
+}) {
   const detailsUrl = `/listings/${property._id}`;
+
+  const addToFavorites = async () => {
+    try {
+      const listing_id = property._id;
+      const response = await fetch("/api/favorites/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          listing_id, // replace with actual listing ID
+        }),
+      });
+      const { success, message } = await response.json(); // Parse JSON
+      if (success) {
+        setFavorites([...favorites, listing_id]);
+      }
+      console.log(resp);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  };
+
+  const removeFromFavorites = async () => {
+    try {
+      const listing_id = property._id;
+      const response = await fetch("/api/favorites/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          listing_id, // replace with actual listing ID
+        }),
+      });
+      const { success, message } = await response.json(); // Parse JSON
+      if (success) {
+        setFavorites(favorites.filter((id) => id !== listing_id));
+      }
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  };
+
   return (
     <a
       href={detailsUrl}
@@ -40,12 +90,40 @@ export default function PropertyCard({ property }) {
           </div>
         </div>
       </div>
-      <button
-        className="absolute top-2 right-2 p-2 rounded-full text-gray-900 hover:bg-red-700 hover:text-white transition duration-300"
-        onClick={() => console.log(property._id, ",added to favorite list!")}
-      >
-        <FavoriteBorderIcon />
-      </button>
+
+      {!isFavorite && (
+        <Button
+          isIconOnly
+          color="danger"
+          variant="ghost"
+          radius="full"
+          onClick={(e) => {
+            e.preventDefault(); // Prevents the default behavior of the button
+            e.stopPropagation(); // Prevents the event from bubbling up
+            addToFavorites();
+          }}
+          className="m-2 z-10"
+        >
+          <FavoriteBorderIcon />
+        </Button>
+      )}
+
+      {isFavorite && (
+        <Button
+          isIconOnly
+          color="danger"
+          variant="solid"
+          radius="full"
+          onClick={(e) => {
+            e.preventDefault(); // Prevents the default behavior of the button
+            e.stopPropagation(); // Prevents the event from bubbling up
+            removeFromFavorites();
+          }}
+          className="m-2 z-10"
+        >
+          <FavoriteBorderIcon />
+        </Button>
+      )}
     </a>
   );
 }

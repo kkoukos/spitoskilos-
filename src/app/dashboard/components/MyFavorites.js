@@ -6,6 +6,7 @@ export default function MyFavorites({ user }) {
   const [loading, setLoading] = useState(true);
 
   const [listings, setListings] = useState([]);
+  console.log(listings);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -44,7 +45,12 @@ export default function MyFavorites({ user }) {
           {!loading && (
             <>
               {listings.map((listing, index) => (
-                <FavoriteListing key={index} listing={listing} />
+                <FavoriteListing
+                  key={index}
+                  listing={listing}
+                  listings={listings}
+                  setListings={setListings}
+                />
               ))}
             </>
           )}

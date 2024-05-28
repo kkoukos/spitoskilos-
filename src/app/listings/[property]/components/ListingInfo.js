@@ -12,11 +12,12 @@ import BathtubOutlinedIcon from "@mui/icons-material/BathtubOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PlaylistAddCheckOutlinedIcon from "@mui/icons-material/PlaylistAddCheckOutlined";
+import { Remove } from "@mui/icons-material";
 
-export default function ListingsInfo({ params }) {
+export default function ListingsInfo({ params, user }) {
   SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
-
+  const [favorites, setFavorites] = useState(user.favorites);
   const imageUrls = [];
 
   useEffect(() => {
@@ -52,9 +53,32 @@ export default function ListingsInfo({ params }) {
           listing_id, // replace with actual listing ID
         }),
       });
-      const resp = await response.json(); // Parse JSON
-
+      const { success, message } = await response.json(); // Parse JSON
+      if (success) {
+        setFavorites([...favorites, listing._id]);
+      }
       console.log(resp);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  };
+
+  const removeFromFavorites = async () => {
+    try {
+      const listing_id = params.property;
+      const response = await fetch("/api/favorites/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          listing_id, // replace with actual listing ID
+        }),
+      });
+      const { success, message } = await response.json(); // Parse JSON
+      if (success) {
+        setFavorites(favorites.filter((id) => id !== listing_id));
+      }
     } catch (error) {
       console.log("Error fetching data:", error);
     }
@@ -113,13 +137,24 @@ export default function ListingsInfo({ params }) {
                 </div>
               </div>
               <div className="flex flex-col items-center justify-between">
-                <button
-                  onClick={addToFavorites}
-                  class="bg-transparent hover:bg-gray-300 text-gray-700 py-2 px-4 border border-gray-500 rounded"
-                >
-                  <PlaylistAddCheckOutlinedIcon className="mr-2" />
-                  Save to Favorites
-                </button>
+                {favorites.includes(listing._id) ? (
+                  <button
+                    onClick={removeFromFavorites}
+                    className="bg-transparent hover:bg-gray-300 text-gray-700 py-2 px-4 border border-gray-500 rounded"
+                  >
+                    <Remove className="mr-2" />
+                    Remove from Favorites
+                  </button>
+                ) : (
+                  <button
+                    onClick={addToFavorites}
+                    className="bg-transparent hover:bg-gray-300 text-gray-700 py-2 px-4 border border-gray-500 rounded"
+                  >
+                    <PlaylistAddCheckOutlinedIcon className="mr-2" />
+                    Save to Favorites
+                  </button>
+                )}
+
                 <div className="text-xl font-semibold text-gray-900">
                   <LocalPhoneOutlinedIcon className="mb-1 mr-2 text-md" />
                   {/* +30 6938904850 */}

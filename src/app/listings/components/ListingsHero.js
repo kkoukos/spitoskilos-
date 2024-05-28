@@ -8,7 +8,10 @@ import NavBarSticky from "../../../components/NavBarSticky";
 import Filters from ".././components/Filters";
 import PropertyDisplay from ".././components/PropertyDisplay";
 
-export default function ListingsHero({ children }) {
+export default function ListingsHero({ children, user }) {
+  const [favorites, setFavorites] = useState(user.favorites);
+  console.log(favorites);
+
   const [listings, setListings] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
 
@@ -19,11 +22,9 @@ export default function ListingsHero({ children }) {
   const [lng, setLng] = useState(searchParams.get("lng") || 30);
   const [type, setType] = useState(searchParams.get("type") || "Buy");
 
-  // useEffect(() => {
-  //   setLat(searchParams.get("lat"));
-  //   setLng(searchParams.get("lng"));
-  //   setType(searchParams.get("type"));
-  // }, [searchParams]);
+  useEffect(() => {
+    console.log(favorites);
+  }, [favorites]);
 
   const [markersList, setMarkersList] = useState([]); // State to store latLngList
 
@@ -79,6 +80,8 @@ export default function ListingsHero({ children }) {
           lat={lat}
           lng={lng}
           loading={loading}
+          setFavorites={setFavorites}
+          favorites={favorites}
         ></PropertyDisplay>
       </div>
     </>

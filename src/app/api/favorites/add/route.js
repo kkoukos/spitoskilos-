@@ -35,7 +35,23 @@ export async function POST(req) {
       .collection("favorites")
       .updateOne({ _id: user._id }, { $push: { favorites: listing_id } });
 
-    //add logic to add favorites on listings
+    const session = cookies().get("session").value;
+    let sessionObject = JSON.parse(session);
+    console.log(sessionObject);
+    console.log(sessionObject.favorites);
+    sessionObject.favorites.push(listing_id);
+
+    const new_session = JSON.stringify(sessionObject);
+
+    console.log(sessionObject);
+
+    cookies().delete("session");
+
+    cookies().set("session", new_session, {
+      httpOnly: true,
+      path: "/",
+      maxAge: 60 * 60 * 24,
+    });
 
     return Response.json({
       success: true,

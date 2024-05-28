@@ -27,6 +27,12 @@ export async function signIn(username, password) {
       return { success: false, message: "nouserfound" }; // User not found
     }
 
+    const favorites_query = await db
+      .collection("favorites")
+      .find({ _id: existingUser._id })
+      .toArray();
+    const favorites = favorites_query[0].favorites;
+
     if (password === existingUser.password) {
       const user = {
         _id: existingUser._id,
@@ -36,6 +42,7 @@ export async function signIn(username, password) {
         phone: existingUser.phone,
         type: existingUser.type || 0,
         profile_picture: existingUser.profile_picture,
+        favorites: favorites,
       };
 
       return { success: true, message: user }; // Password is correct

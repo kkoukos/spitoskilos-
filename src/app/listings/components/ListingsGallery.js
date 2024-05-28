@@ -3,9 +3,12 @@
 import Image from "next/image";
 import PropertyCard from "../components/PropertyCard";
 
-export default function ListingsGallery(props) {
-  let { data, name } = props;
-
+export default function ListingsGallery({
+  data,
+  name,
+  setFavorites,
+  favorites,
+}) {
   return (
     <>
       <div
@@ -18,7 +21,13 @@ export default function ListingsGallery(props) {
         <div className="flex-col overflow-y-scroll no-scrollbar">
           <div className="flex flex-wrap justify-center">
             {data.map((property) => (
-              <PropertyCard key={property._id} property={property} />
+              <PropertyCard
+                key={property._id}
+                property={property}
+                setFavorites={setFavorites}
+                favorites={favorites}
+                isFavorite={favorites.includes(property._id)}
+              />
             ))}
           </div>
         </div>

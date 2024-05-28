@@ -8,8 +8,6 @@ export async function POST(req) {
     const { listing_id } = await req.json();
     const user = JSON.parse(cookies().get("session").value);
 
-    console.log(user._id);
-
     const client = await clientPromise;
     const db = client.db("users");
     console.log("Connected to MongoDB.");
@@ -20,7 +18,6 @@ export async function POST(req) {
       .toArray();
 
     const favorites = updatedData[0].favorites;
-    console.log(favorites);
 
     if (!favorites.includes(listing_id)) {
       console.log("Favorites doesnt exists.");
@@ -36,6 +33,25 @@ export async function POST(req) {
       .updateOne({ _id: user._id }, { $pull: { favorites: listing_id } });
 
     //add logic to add favorites on listings
+    const session = cookies().get("session").value;
+    let sessionObject = JSON.parse(session);
+    console.log(sessionObject);
+    console.log(sessionObject.favorites);
+    sessionObject.favorites = sessionObject.favorites.filter(
+      (id) => id !== listing_id
+    );
+
+    const new_session = JSON.stringify(sessionObject);
+
+    console.log(sessionObject);
+
+    cookies().delete("session");
+
+    cookies().set("session", new_session, {
+      httpOnly: true,
+      path: "/",
+      maxAge: 60 * 60 * 24,
+    });
 
     return Response.json({
       success: true,
