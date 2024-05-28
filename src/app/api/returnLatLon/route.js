@@ -45,10 +45,12 @@ export async function POST(req) {
       console.log("Longitude:", longitude);
 
       // Return latitude and longitude as an object
+
       return Response.json({ lat: latitude, lon: longitude });
     } else {
       console.log(response);
       console.log(url);
+
       throw new Error("Invalid data structure received from API");
     }
   } catch (error) {

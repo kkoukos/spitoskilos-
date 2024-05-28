@@ -8,6 +8,7 @@ export async function POST(req, res) {
   try {
     const { success, message } = await logOut();
     console.log(success);
+
     return Response.json({ success: success, message: message });
   } catch (error) {
     console.log(error);

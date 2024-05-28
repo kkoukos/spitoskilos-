@@ -61,6 +61,7 @@ export async function POST(req) {
     return Response.json({ success: false });
   } catch (e) {
     console.error("API error:", e.message);
+
     return Response.json({ error: e.message });
   }
 }

@@ -13,6 +13,7 @@ export async function GET(req) {
     return Response.json(data);
   } catch (e) {
     console.error("API error:", e.message);
+
     return Response.json({ error: e.message });
   }
 }

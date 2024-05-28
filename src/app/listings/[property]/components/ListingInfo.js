@@ -32,7 +32,6 @@ export default function ListingsInfo({ params }) {
         });
         const listing = await response.json(); // Parse JSON
         setListing(listing);
-        console.log(listing);
       } catch (error) {
         console.log("Error fetching data:", error);
       }
@@ -42,7 +41,23 @@ export default function ListingsInfo({ params }) {
   }, []); // Empty dependency array ensures useEffect runs only once
 
   const addToFavorites = async () => {
-    console.log("Saving to favorites:", listing);
+    try {
+      const listing_id = params.property;
+      const response = await fetch("/api/favorites/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          listing_id, // replace with actual listing ID
+        }),
+      });
+      const resp = await response.json(); // Parse JSON
+
+      console.log(resp);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
   };
 
   return (

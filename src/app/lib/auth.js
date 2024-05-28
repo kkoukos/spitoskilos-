@@ -90,8 +90,14 @@ export async function signUp(name, username, password, email, phone) {
       profile_picture: "",
     };
 
+    const favorite = {
+      _id: id,
+      favorites: [],
+    };
+
     // Insert the new user document into the users collection
     const result = await db.collection("users").insertOne(newUser);
+    const result2 = await db.collection("favorites").insertOne(favorite);
 
     // Return the ID of the newly created user
     return { success: true, result: "User signed up successfully." };
