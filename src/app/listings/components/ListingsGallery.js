@@ -8,6 +8,7 @@ export default function ListingsGallery({
   name,
   setFavorites,
   favorites,
+  loggedIn,
 }) {
   return (
     <>
@@ -24,9 +25,10 @@ export default function ListingsGallery({
               <PropertyCard
                 key={property._id}
                 property={property}
-                setFavorites={setFavorites}
-                favorites={favorites}
-                isFavorite={favorites.includes(property._id)}
+                setFavorites={loggedIn ? setFavorites : null}
+                favorites={loggedIn ? favorites : []}
+                isFavorite={loggedIn ? favorites.includes(property._id) : false}
+                loggedIn={loggedIn}
               />
             ))}
           </div>

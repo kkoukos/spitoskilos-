@@ -17,6 +17,7 @@ export default function PropertyDisplay({
   loading,
   setFavorites,
   favorites,
+  loggedIn,
 }) {
   // Empty dependency array ensures useEffect runs only once
   return (
@@ -42,6 +43,7 @@ export default function PropertyDisplay({
                   name={name}
                   setFavorites={setFavorites}
                   favorites={favorites}
+                  loggedIn={loggedIn}
                 />
               </div>
               <div className="w-full h-full">

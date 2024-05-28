@@ -8,8 +8,8 @@ import NavBarSticky from "../../../components/NavBarSticky";
 import Filters from ".././components/Filters";
 import PropertyDisplay from ".././components/PropertyDisplay";
 
-export default function ListingsHero({ children, user }) {
-  const [favorites, setFavorites] = useState(user.favorites);
+export default function ListingsHero({ children, user, loggedIn }) {
+  const [favorites, setFavorites] = useState(user.favorites || null);
   console.log(favorites);
 
   const [listings, setListings] = useState([]);
@@ -82,6 +82,7 @@ export default function ListingsHero({ children, user }) {
           loading={loading}
           setFavorites={setFavorites}
           favorites={favorites}
+          loggedIn={loggedIn}
         ></PropertyDisplay>
       </div>
     </>

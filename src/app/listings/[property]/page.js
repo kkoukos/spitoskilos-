@@ -21,7 +21,11 @@ export default async function Page({ params }) {
     <>
       <NavBar></NavBar>
 
-      <ListingsInfo params={params} user={user}></ListingsInfo>
+      <ListingsInfo
+        params={params}
+        user={user}
+        loggedIn={loggedIn}
+      ></ListingsInfo>
     </>
   );
 }

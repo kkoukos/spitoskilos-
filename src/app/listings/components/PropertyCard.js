@@ -8,6 +8,7 @@ export default function PropertyCard({
   setFavorites,
   isFavorite,
   favorites,
+  loggedIn,
 }) {
   const detailsUrl = `/listings/${property._id}`;
 
@@ -90,8 +91,8 @@ export default function PropertyCard({
           </div>
         </div>
       </div>
-
-      {!isFavorite && (
+      {}
+      {!isFavorite && loggedIn && (
         <Button
           isIconOnly
           color="danger"
@@ -108,7 +109,7 @@ export default function PropertyCard({
         </Button>
       )}
 
-      {isFavorite && (
+      {isFavorite && loggedIn && (
         <Button
           isIconOnly
           color="danger"

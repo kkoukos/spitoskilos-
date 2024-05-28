@@ -13,12 +13,19 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PlaylistAddCheckOutlinedIcon from "@mui/icons-material/PlaylistAddCheckOutlined";
 import { Remove } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
-export default function ListingsInfo({ params, user }) {
+export default function ListingsInfo({ params, user, loggedIn }) {
   SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
   const [favorites, setFavorites] = useState(user.favorites);
   const imageUrls = [];
+
+  const router = useRouter();
+
+  const handleLoginRedirect = () => {
+    router.push("/login");
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -137,21 +144,30 @@ export default function ListingsInfo({ params, user }) {
                 </div>
               </div>
               <div className="flex flex-col items-center justify-between">
-                {favorites.includes(listing._id) ? (
-                  <button
-                    onClick={removeFromFavorites}
-                    className="bg-transparent hover:bg-gray-300 text-gray-700 py-2 px-4 border border-gray-500 rounded"
-                  >
-                    <Remove className="mr-2" />
-                    Remove from Favorites
-                  </button>
+                {loggedIn ? (
+                  favorites.includes(listing._id) ? (
+                    <button
+                      onClick={removeFromFavorites}
+                      className="bg-transparent hover:bg-gray-300 text-gray-700 py-2 px-4 border border-gray-500 rounded"
+                    >
+                      <Remove className="mr-2" />
+                      Remove from Favorites
+                    </button>
+                  ) : (
+                    <button
+                      onClick={addToFavorites}
+                      className="bg-transparent hover:bg-gray-300 text-gray-700 py-2 px-4 border border-gray-500 rounded"
+                    >
+                      <PlaylistAddCheckOutlinedIcon className="mr-2" />
+                      Save to Favorites
+                    </button>
+                  )
                 ) : (
                   <button
-                    onClick={addToFavorites}
+                    onClick={handleLoginRedirect}
                     className="bg-transparent hover:bg-gray-300 text-gray-700 py-2 px-4 border border-gray-500 rounded"
                   >
-                    <PlaylistAddCheckOutlinedIcon className="mr-2" />
-                    Save to Favorites
+                    Login to Save
                   </button>
                 )}
 

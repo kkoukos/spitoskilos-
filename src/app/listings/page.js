@@ -19,7 +19,7 @@ export default async function Home() {
   }
 
   return (
-    <ListingsHero user={user}>
+    <ListingsHero user={user} loggedIn={loggedIn}>
       <NavBarSticky />
     </ListingsHero>
   );
