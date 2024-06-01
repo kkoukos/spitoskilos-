@@ -21,7 +21,8 @@ export default async function middleware(req) {
     return NextResponse.redirect(`${req.nextUrl.origin}/`);
   }
 
-  return NextResponse.next();
+  if (isProtectedRoute && !sessionCookie)
+    return NextResponse.redirect(`${req.nextUrl.origin}/`);
 }
 
 // Routes Middleware should not run on

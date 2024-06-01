@@ -50,7 +50,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="flex items-center flex-col w-full h-screen text-primary-text"></div>
     </>
   );
 }
