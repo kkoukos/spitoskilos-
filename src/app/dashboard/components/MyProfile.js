@@ -12,7 +12,7 @@ import {
   Save,
   Upload,
 } from "@mui/icons-material";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function MyProfile({ user }) {
@@ -22,8 +22,37 @@ export default function MyProfile({ user }) {
 
   const router = useRouter();
 
-  function handleEdit() {
+  const [formData, setFormData] = useState({
+    name: user.name,
+    email: user.email,
+    phone: user.phone,
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    console.log(name, value);
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  async function handleEdit(type) {
+    if (type === 0) {
+      const response = await fetch("/api/user/edit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      router.refresh();
+    }
+
     setEditing(!editing);
+    setFormData({
+      name: user.name || "",
+      email: user.email || "",
+      phone: user.phone || "",
+    });
   }
 
   async function handleLogOut() {
@@ -65,6 +94,34 @@ export default function MyProfile({ user }) {
     });
   }
 
+  const validateEmail = (email) =>
+    email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
+
+  const emailIsInvalid = useMemo(() => {
+    const { email } = formData; // Destructure email from formData
+    if (email === "") return false;
+
+    return validateEmail(email) ? false : true;
+  }, [formData]);
+
+  const validateName = (name) =>
+    /^[a-zA-Z]+(?:\s[a-zA-Z]+)?(?:\s[a-zA-Z]+)?$/.test(name); // Only alphabetic characters with at most one whitespace
+
+  const nameIsInvalid = useMemo(() => {
+    const { name } = formData; // Destructure name from formData
+    if (name === "") return false;
+
+    return validateName(name) ? false : true;
+  }, [formData]);
+
+  const validatePhoneNumber = (phone) => /^[0-9]{8,15}$/.test(phone);
+
+  const phoneNumberIsInvalid = useMemo(() => {
+    const { phone } = formData; // Destructure phone from formData
+    if (phone === "") return false;
+
+    return validatePhoneNumber(phone) ? false : true;
+  }, [formData]);
   return (
     <>
       <h1 className="font-bold text-4xl w-[90%] ">My Profile</h1>
@@ -137,7 +194,7 @@ export default function MyProfile({ user }) {
                   <Button
                     size="xl"
                     startContent={<Edit />}
-                    onPress={handleEdit}
+                    onPress={() => handleEdit(1)}
                   >
                     <span className="tracking-wide">Edit Profile</span>
                   </Button>
@@ -163,25 +220,47 @@ export default function MyProfile({ user }) {
             )}
             {editing && (
               <>
-                <div className="flex flex-col justify-between w-full gap-2">
-                  <div className="w-3/4 flex gap-1 items-center  justify-between">
-                    <p>Name:</p>
-                    <Input defaultValue={user.name} className="w-3/4" />
+                <div className="flex flex-col justify-between w-full gap-2 ">
+                  <div className="w-3/4 flex gap-1 items-start  justify-between">
+                    <p className="h-[40px]">Name:</p>
+                    <Input
+                      name="name"
+                      className="w-3/4"
+                      value={formData.name}
+                      onChange={handleChange}
+                      isInvalid={nameIsInvalid}
+                      errorMessage="Name should be only alphabetic characters with only 2 whitespaces."
+                    />
                   </div>
 
-                  <div className="w-3/4 flex  gap-1 items-center justify-between">
-                    <p>Email:</p>
-                    <Input defaultValue={user.email} className="w-3/4" />
+                  <div className="w-3/4 flex  gap-1 items-start justify-between">
+                    <p className="h-[40px]">Email:</p>
+                    <Input
+                      name="email"
+                      className="w-3/4"
+                      value={formData.email}
+                      onChange={handleChange}
+                      errorMessage="Email is invalid."
+                      isInvalid={emailIsInvalid}
+                    />
                   </div>
-                  <div className="w-3/4 flex  gap-1 items-center justify-between">
-                    <p>Phone:</p>
-                    <Input defaultValue={user.phone} className="w-3/4" />
+                  <div className="w-3/4 flex  gap-1 items-start justify-between">
+                    <p className="h-[40px]">Phone:</p>
+                    <Input
+                      name="phone"
+                      className="w-3/4"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      isInvalid={phoneNumberIsInvalid}
+                      errorMessage="Phone number must contain only numeric characters and be between 8 and 15 digits long"
+                      maxLength={10}
+                    />
                   </div>
                   <div className="mt-6 flex justify-between w-3/4">
                     <Button
                       size="xl"
                       startContent={<Save />}
-                      onPress={handleEdit}
+                      onPress={() => handleEdit(0)}
                       className="w-[40%]"
                     >
                       <span className="tracking-wide">Save</span>
@@ -190,7 +269,7 @@ export default function MyProfile({ user }) {
                       size="xl"
                       color="danger"
                       startContent={<Clear />}
-                      onPress={handleEdit}
+                      onPress={() => handleEdit(1)}
                       className="w-[40%]"
                     >
                       <span className="tracking-wide">Cancel</span>
