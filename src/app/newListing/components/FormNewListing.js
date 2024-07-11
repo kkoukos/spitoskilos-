@@ -12,15 +12,86 @@ const FormNewListing = () => {
           blocks: [
             {
               name: "welcome-screen",
-              id: "jg1401r",
+              id: "welcome",
               attributes: {
                 label: "Your listing",
-                description: "Upload your listing to spitoskilos",
+                description: "Upload your listing to Spitoskilos!",
                 attachment: {
                   type: "image",
                   url: "https://quillforms.com/wp-content/uploads/2022/01/4207-ai-1.jpeg",
                 },
                 attachmentMaxWidth: "300px",
+              },
+            },
+            {
+              name: "dropdown",
+              id: "category",
+              attributes: {
+                label: "Choose property category",
+                choices: [
+                  {
+                    label: "House",
+                    value: "House",
+                  },
+                  {
+                    label: "Commercial",
+                    value: "Commercial",
+                  },
+                  {
+                    label: "Land",
+                    value: "Land",
+                  },
+                ],
+              },
+            },
+            {
+              name: "dropdown",
+              id: "subcategory",
+              attributes: {
+                label: "Choose property type",
+                choices: [
+                  {
+                    label: "Apartment",
+                    value: "Apartment",
+                  },
+                  {
+                    label: "Studio",
+                    value: "Studio",
+                  },
+                  {
+                    label: "Maisonette",
+                    value: "Maisonette",
+                  },
+                  {
+                    label: "Vila",
+                    value: "Vila",
+                  },
+                  {
+                    label: "Building",
+                    value: "Building",
+                  },
+                  {
+                    label: "Other",
+                    value: "Other",
+                  },
+                ],
+              },
+            },
+            {
+              name: "dropdown",
+              id: "availablefor",
+              attributes: {
+                label: "Available for",
+                choices: [
+                  {
+                    label: "Buy",
+                    value: "Buy",
+                  },
+                  {
+                    label: "Rent",
+                    value: "Rent",
+                  },
+                ],
               },
             },
             {
@@ -54,22 +125,6 @@ const FormNewListing = () => {
               attributes: {
                 required: true,
                 label: "Great {{field:kdsfkdg}}, can you type your age?",
-              },
-            },
-            {
-              name: "dropdown",
-              id: "3nsdf934",
-              attributes: {
-                choices: [
-                  {
-                    label: "Choice 1",
-                    value: "choice-1",
-                  },
-                  {
-                    label: "Choice 2",
-                    value: "choice-2",
-                  },
-                ],
               },
             },
             {
@@ -151,7 +206,7 @@ const FormNewListing = () => {
           },
           theme: {
             font: "Roboto",
-            buttonsBgColor: "#9b51e0",
+            buttonsBgColor: "#14293A",
             logo: {
               src: "",
             },
