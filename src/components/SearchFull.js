@@ -12,7 +12,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { League_Spartan } from "next/font/google";
 import { useState, useRef } from "react";
-import { PlaceConnector } from "../connectors/placesConnector";
+import { placeConnector } from "../connectors/placesConnector";
 
 const spartan_light = League_Spartan({
   subsets: ["latin"],
@@ -49,7 +49,7 @@ export default function SearchFull({ type }) {
       setPredictions([]);
       if (text.length > 5) {
         try {
-          const data = await PlaceConnector(text);
+          const data = await placeConnector(text);
           setPredictions(data.suggestions);
         } catch (error) {
           console.error("Error in place api:", error);
