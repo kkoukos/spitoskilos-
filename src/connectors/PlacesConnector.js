@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function placesConnector(inputText) {
+export async function PlacesConnector(inputText) {
   const apiKey = process.env.NEXT_PUBLIC_MAPS_API;
 
   const url = "https://places.googleapis.com/v1/places:autocomplete";
