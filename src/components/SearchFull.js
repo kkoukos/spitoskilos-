@@ -12,7 +12,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { League_Spartan } from "next/font/google";
 import { useState, useRef } from "react";
-import { PlaceConnector } from "../connectors/PlacesConnector";
+import { PlaceConnector } from "../connectors/placesConnector";
 
 const spartan_light = League_Spartan({
   subsets: ["latin"],
