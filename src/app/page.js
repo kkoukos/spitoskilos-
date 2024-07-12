@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import NavBar from "../components/NavBar";
 import LogInAction from "../components/LogInAction";
 import CallForAction from "../components/CallForAction";
+import Footer from "../components/Footer";
 import { cookies } from "next/headers";
 export default async function Home() {
   const sessionCookie = await cookies().get("session")?.value;
@@ -22,6 +23,7 @@ export default async function Home() {
       <Hero></Hero>
       {!loggedIn && <LogInAction></LogInAction>}
       <CallForAction></CallForAction>
+      <Footer></Footer>
     </>
   );
 }

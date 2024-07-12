@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.5",
     "@googlemaps/js-api-loader": "^1.16.6",
     "@mui/icons-material": "^5.15.15",
+    "@mui/joy": "^5.0.0-beta.48",
     "@mui/material": "^5.15.15",
     "@nextui-org/react": "^2.3.6",
     "@quillforms/react-renderer-utils": "^5.11.0",

@@ -15,12 +15,24 @@ import {
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import AlertDialog from "./AlertDialog";
+
 export default function MyProfile({ user }) {
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [editing, setEditing] = useState(false);
   const [file, setFile] = useState(null);
 
   const router = useRouter();
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpenDialog = () => {
+    setOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpen(false);
+  };
 
   const [formData, setFormData] = useState({
     name: user.name,
@@ -231,9 +243,14 @@ export default function MyProfile({ user }) {
                     size="xl"
                     variant="bordered"
                     startContent={<Delete />}
-                    onPress={handleDelete}
+                    onPress={handleOpenDialog}
                   >
                     Delete Account
+                    <AlertDialog
+                      open={open}
+                      onClose={handleCloseDialog}
+                      onAgree={handleDelete}
+                    />
                   </Button>
                 </div>
               </>
