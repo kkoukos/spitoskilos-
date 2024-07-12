@@ -29,7 +29,7 @@ export default async function middleware(req) {
   if (isAdminRoute && !sessionCookie) {
     return NextResponse.redirect(`${req.nextUrl.origin}/`);
   } else {
-    if (isAdminRoute && sessionCookie.type != "0") {
+    if (isAdminRoute && sessionCookie.type == 0) {
       return NextResponse.redirect(`${req.nextUrl.origin}/`);
     }
   }

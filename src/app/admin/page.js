@@ -1,6 +1,8 @@
 "use server";
 import { cookies } from "next/headers";
 
+import MainPart from "./components/MainPart";
+
 export default async function Home() {
   const sessionCookie = await cookies().get("session")?.value;
   let loggedIn = false;
@@ -12,5 +14,9 @@ export default async function Home() {
 
     loggedIn = true;
   }
-  return <div className="w-screen h-screen flex">{user._id}</div>;
+  return (
+    <div className="w-screen h-screen flex ">
+      <MainPart user={user} />
+    </div>
+  );
 }

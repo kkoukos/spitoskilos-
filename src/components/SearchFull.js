@@ -49,7 +49,7 @@ export default function SearchFull({ type }) {
       setPredictions([]);
       if (text.length > 5) {
         try {
-          const data = await placesConnector(text);
+          const data = await PlacesConnector(text);
           setPredictions(data.suggestions);
         } catch (error) {
           console.error("Error in place api:", error);
