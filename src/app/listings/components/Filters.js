@@ -97,13 +97,13 @@ export default function Filters({
       type.has(listing.type.toLowerCase())
     );
 
-    // if (category.size !== 0) {  uncomment when db is cleared of bad data
-    //   templist = templist.filter(
-    //     (listing) =>
-    //       listing.propertyMainCategory &&
-    //       category.has(listing.propertyMainCategory.toLowerCase())
-    //   );
-    // }
+    if (category.size !== 0) {
+      templist = templist.filter(
+        (listing) =>
+          listing.propertyMainCategory &&
+          category.has(listing.propertyMainCategory.toLowerCase())
+      );
+    }
 
     if (subCategory.size !== 0) {
       templist = templist.filter((listing) =>
