@@ -2,20 +2,30 @@ import { RadioButtonChecked, RadioButtonUnchecked } from "@mui/icons-material";
 import React from "react";
 import { Avatar } from "@nextui-org/react";
 
-export default function UserCard({ user, selected = false }) {
+export default function UserCard({
+  user,
+  selected = false,
+  index,
+  setSelectedNum,
+}) {
+  const handleSelection = () => {
+    console.log(index);
+    setSelectedNum(index); // Update selectedNum with the current index
+  };
   return (
     <>
       <div className="h-[10%] w-full flex items-center justify-between rounded-xl bg-[#14293A] px-10">
-        <div className="flex w-2/5 justify-between items-center">
+        <div className="flex w-[50%] justify-between items-center">
           <Avatar
-            src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+            src={user.profile_picture}
             radius="sm"
+            className="max-w-1/5"
           />
-          <div>{user.name}</div>
-          <div>{user.email}</div>
+          <div className="w-2/5">{user.username}</div>
+          <div className="w-2/5">{user.email}</div>
         </div>
 
-        <div className="hover:cursor-pointer">
+        <div className="hover:cursor-pointer" onClick={handleSelection}>
           {!selected && <RadioButtonUnchecked />}
           {selected && <RadioButtonChecked />}
         </div>
