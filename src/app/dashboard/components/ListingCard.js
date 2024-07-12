@@ -20,12 +20,14 @@ export default function ListingCard({ listing }) {
       const success = data.success;
       console.log(success);
       if (success) {
-        router.push("/");
+        router.push("/dashboard");
       }
     });
 
-    router.push("/");
+    router.push("/dashboard");
   }
+
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
 
