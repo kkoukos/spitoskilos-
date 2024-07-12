@@ -7,6 +7,7 @@ export default function UserCard({
   selected = false,
   index,
   setSelectedNum,
+  key,
 }) {
   const handleSelection = () => {
     console.log(index);
@@ -16,7 +17,7 @@ export default function UserCard({
     <>
       <div
         className="h-[10%] w-full flex items-center justify-between rounded-xl bg-[#14293A] px-10"
-        key={index}
+        key={key}
       >
         <div className="flex w-[50%] justify-between items-center">
           <Avatar
