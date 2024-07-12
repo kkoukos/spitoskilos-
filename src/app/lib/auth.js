@@ -112,3 +112,49 @@ export async function signUp(name, username, password, email, phone) {
     return error;
   }
 }
+
+export async function deleteUser(username) {
+  try {
+    const uri = process.env.NEXT_PUBLIC_MONGODB_URI;
+    const client = new MongoClient(uri);
+
+    await client.connect();
+    const db = client.db("users");
+    console.log("Connected to MongoDB.");
+
+    // Find the user by username
+    const user = await db.collection("users").findOne({ username });
+    if (!user) {
+      console.log("User not found");
+      return { success: false, result: "User not found." };
+    }
+
+    const userId = user._id;
+
+    // Delete user from 'users' collection
+    await db.collection("users").deleteOne({ _id: userId });
+    console.log(`Deleted user with ID: ${userId} from 'users' collection.`);
+
+    // Delete all listings associated with the user ID from 'listings' collection
+
+    const db1 = client.db("listings");
+
+    const listingsDeleteResult = await db1
+      .collection("Residences")
+      .deleteMany({ user_id: userId });
+    console.log(
+      `Deleted ${listingsDeleteResult.deletedCount} listings associated with user ID: ${userId} from 'listings' collection.`
+    );
+
+    // Optionally, delete user's favorites or other related data from other collections
+
+    // Return success message
+    return {
+      success: true,
+      result: "User and associated listings deleted successfully.",
+    };
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    return { success: false, result: "An error occurred while deleting user." };
+  }
+}

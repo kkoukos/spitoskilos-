@@ -71,6 +71,25 @@ export default function MyProfile({ user }) {
     });
   }
 
+  async function handleDelete() {
+    const response = await fetch("/api/auth/delete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: user.username }),
+    });
+
+    console.log(response);
+
+    response.json().then((data) => {
+      console.log(data);
+      const success = data.success;
+      console.log(success);
+      if (success) {
+        router.push("/");
+      }
+    });
+  }
+
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
@@ -212,6 +231,7 @@ export default function MyProfile({ user }) {
                     size="xl"
                     variant="bordered"
                     startContent={<Delete />}
+                    onPress={handleDelete}
                   >
                     Delete Account
                   </Button>
