@@ -10,7 +10,19 @@ export async function GET(req) {
     // console.log("Data retrieved:", data);
     console.log("Data received.");
 
-    return Response.json(data);
+    const response = new Response(JSON.stringify(data), {
+      status: 200,
+      headers: {
+        "Cache-Control":
+          "no-store, no-cache, must-revalidate, proxy-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+        "Surrogate-Control": "no-store",
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response;
   } catch (e) {
     console.error("API error:", e.message);
 
