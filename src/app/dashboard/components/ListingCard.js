@@ -3,7 +3,7 @@ import { Button, Chip } from "@nextui-org/react";
 
 export default function ListingCard({ listing }) {
   return (
-    <div className="w-full h-44  rounded-xl  border-gray-500 border-1 flex text-white mb-2 hover:bg-[#112536]">
+    <div className="w-full h-72  rounded-xl  border-gray-500 border-1 flex text-white mb-2 hover:bg-[#112536]">
       <div className="w-2/5  flex items-center justify-center">
         <img
           className="w-[80%] h-[80%] border-1 border-gray-700 rounded-lg "
@@ -29,9 +29,9 @@ export default function ListingCard({ listing }) {
               € {listing?.price.toLocaleString()}
             </div>
             <div className="flex gap-2">
-              <Button isIconOnly color="default" size="sm">
+              {/* <Button isIconOnly color="default" size="sm">
                 <Edit />
-              </Button>
+              </Button> */}
               <Button isIconOnly color="danger" size="sm">
                 <Delete />
               </Button>

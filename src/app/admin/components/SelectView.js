@@ -24,13 +24,13 @@ export default function SelectView({ view, setView }) {
           <People />
         </NavBarOption>
 
-        <NavBarOption
+        {/* <NavBarOption
           selected={view[1]}
           onClick={() => handleSelect(1)}
           title="LISTINGS"
         >
           <House />
-        </NavBarOption>
+        </NavBarOption> */}
       </div>
     </>
   );

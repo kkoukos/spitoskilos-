@@ -6,6 +6,7 @@ import ListingSkeleton from "./ListingSkeleton";
 import { Button } from "@nextui-org/react";
 import { AddCircle } from "@mui/icons-material";
 
+import { useRouter } from "next/navigation";
 export default function MyListings({ user }) {
   const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState([]);
@@ -30,15 +31,22 @@ export default function MyListings({ user }) {
     };
     fetchData(); // Call fetchData function when component mounts
   }, []);
-
+  const router = useRouter();
+  const handleClick = () => {
+    router.push("/newListing");
+  };
   return (
     <>
       <h1 className="font-bold text-4xl w-[90%] ">My Listings</h1>
       <div className="h-4/5 bg-[#14293A] border-t-1 border-gray-700 w-[90%] flex items-start">
-        <div className="w-1/2 flex flex-col h-full">
+        <div className="flex flex-col h-full w-full">
           <div className="flex w-full justify-between mt-4 mb-4 items-end">
             <h1>Currently showing: {listings.length} listings</h1>
-            <Button size="sm" startContent={<AddCircle size="sm" />}>
+            <Button
+              size="sm"
+              startContent={<AddCircle size="sm" />}
+              onClick={handleClick}
+            >
               New Listing
             </Button>
           </div>

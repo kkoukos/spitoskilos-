@@ -4,7 +4,7 @@ import { Button, Skeleton } from "@nextui-org/react";
 
 export default function ListingCard() {
   return (
-    <div className="w-full h-44  rounded-xl  border-gray-500 border-1 flex text-white mb-2">
+    <div className="w-full h-72 rounded-xl  border-gray-500 border-1 flex text-white mb-2">
       <div className="w-2/5  flex items-center justify-center">
         <Skeleton className="w-[80%] h-[80%]  rounded-lg  bg-gray-400"></Skeleton>
       </div>

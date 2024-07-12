@@ -5,7 +5,7 @@ import "@quillforms/renderer-core/build-style/style.css";
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
 import { useRouter } from "next/navigation";
 
-import { PlaceConnector } from "../../../connectors/PlacesConnector";
+import { PlacesConnector } from "../../../connectors/PlacesConnector";
 
 registerCoreBlocks();
 const FormNewListing = () => {
@@ -14,9 +14,20 @@ const FormNewListing = () => {
   const handleSubmit = async (data, { completeForm, setIsSubmitting }) => {
     setIsSubmitting(true);
     console.log();
-    const results = await PlaceConnector(data?.answers?.area?.value);
+    const results = await PlacesConnector(data?.answers?.area?.value);
 
     if (results.suggestions.length > 0) {
+      console.log(results.suggestions[0].placePrediction.place);
+      const placesId = results.suggestions[0].placePrediction.place;
+      console.log(placesId);
+      const response = await fetch("/api/returnLatLon", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ placesId }),
+      });
+
+      const { lat, lon } = await response.json();
+
       const formData = {
         area: data?.answers?.area?.value,
         availability: data?.answers?.availability?.value,
@@ -27,7 +38,8 @@ const FormNewListing = () => {
         description: data?.answers?.description?.value,
         floor: data?.answers?.floor?.value,
         price: data?.answers?.price?.value,
-        placeId: results.suggestions[0].placePrediction,
+        lat: lat,
+        lon: lon,
         subcategory: data?.answers?.subcategory?.value,
         surface: data?.answers?.surface?.value,
         year: data?.answers?.year?.value,

@@ -4,7 +4,7 @@ import MainPanel from "./MainPanel";
 import NavBarSide from "../../../components/NavBarSide";
 
 export default function DashboardMain({ user }) {
-  const [view, setView] = useState([true, false, false]);
+  const [view, setView] = useState([false, true, false]);
   return (
     <div className="w-screen h-screen flex">
       <NavBarSide user={user} setView={setView} view={view}></NavBarSide>
