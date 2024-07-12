@@ -35,13 +35,19 @@ export default function ListingCard({ listing }) {
     setOpen(false);
   };
 
+  const handleClick = () => {
+    window.location.href = `https://www.fineline.gr/listings/${listing?._id}`;
+  };
+
   return (
     <div className="w-full h-72  rounded-xl  border-gray-500 border-1 flex text-white mb-2 hover:bg-[#112536]">
       <div className="w-2/5  flex items-center justify-center">
         <img
-          className="w-[80%] h-[80%] border-1 border-gray-700 rounded-lg "
+          className="w-[80%] h-[80%] border-1 border-gray-700 rounded-lg cursor-pointer"
           src={listing?.pictures[0]}
-        ></img>
+          alt="Listing Image"
+          onClick={handleClick}
+        />
       </div>
       <div className="w-3/5 flex flex-col items-center h-full justify-center">
         {" "}
