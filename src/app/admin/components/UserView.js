@@ -106,7 +106,6 @@ export default function UserView({ user }) {
                 user={user}
                 selected={index === selectedNum}
                 setSelectedNum={setSelectedNum}
-                key={index}
               />
             ))}
           </div>
