@@ -23,6 +23,8 @@ export default function ListingCard({ listing }) {
         router.push("/");
       }
     });
+
+    router.push("/");
   }
 
   const [open, setOpen] = useState(false);
