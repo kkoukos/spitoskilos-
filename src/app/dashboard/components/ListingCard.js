@@ -1,7 +1,40 @@
 import { Delete, Edit } from "@mui/icons-material";
 import { Button, Chip } from "@nextui-org/react";
 
+import AlertDialogListing from "./AlertDialogListing";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 export default function ListingCard({ listing }) {
+  async function handleDelete() {
+    const response = await fetch("/api/deleteListing", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ listing_id: listing?._id }),
+    });
+
+    console.log(response);
+
+    response.json().then((data) => {
+      console.log(data);
+      const success = data.success;
+      console.log(success);
+      if (success) {
+        router.push("/");
+      }
+    });
+  }
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpenDialog = () => {
+    setOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpen(false);
+  };
+
   return (
     <div className="w-full h-72  rounded-xl  border-gray-500 border-1 flex text-white mb-2 hover:bg-[#112536]">
       <div className="w-2/5  flex items-center justify-center">
@@ -32,7 +65,17 @@ export default function ListingCard({ listing }) {
               {/* <Button isIconOnly color="default" size="sm">
                 <Edit />
               </Button> */}
-              <Button isIconOnly color="danger" size="sm">
+              <Button
+                isIconOnly
+                color="danger"
+                size="sm"
+                onPress={handleOpenDialog}
+              >
+                <AlertDialogListing
+                  open={open}
+                  onClose={handleCloseDialog}
+                  onAgree={handleDelete}
+                />
                 <Delete />
               </Button>
             </div>
