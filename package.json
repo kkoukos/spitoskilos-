@@ -15,6 +15,8 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@nextui-org/react": "^2.3.6",
+    "@quillforms/react-renderer-utils": "^5.11.0",
+    "@quillforms/renderer-core": "^5.9.0",
     "@react-google-maps/api": "^2.19.3",
     "@supabase/supabase-js": "^2.43.4",
     "axios": "^1.6.8",
