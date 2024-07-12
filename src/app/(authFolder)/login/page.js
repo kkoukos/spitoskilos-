@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import LogoBlue from "../../../components/LogoBlue";
 import { Button, Input, Link, user } from "@nextui-org/react";
 import { useState } from "react";
+import { EyeFilledIcon } from "./components/EyeFilledIcon";
+import { EyeSlashFilledIcon } from "./components/EyeSlashFilledIcon";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -14,6 +16,10 @@ export default function Login() {
   const [errorMess, setErrorMess] = useState(false);
 
   const router = useRouter();
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
 
   async function handleLogIn(event) {
     setLoading(true);
@@ -44,7 +50,7 @@ export default function Login() {
         <div className="min-w-[30rem] border h-2/5 min-h-[36rem] text-black  w-1/2 flex flex-col items-center justify-center bg-white gap-8 rounded-xl py-16">
           <LogoBlue />
 
-          <div className="w-1/2 flex items-center flex flex-col">
+          <div className="w-1/2 flex items-center flex-col">
             {" "}
             <h1 className="font-bold text-2xl text-center">Welcome back!</h1>
             <h2>
@@ -76,7 +82,7 @@ export default function Login() {
             <div>
               <Input
                 label="Password"
-                type="text"
+                type={isVisible ? "text" : "password"}
                 labelPlacement="outside"
                 variant="faded"
                 size="lg"
@@ -85,6 +91,19 @@ export default function Login() {
                   setPassword(e.target.value);
                   setErrorMess(false);
                 }}
+                endContent={
+                  <button
+                    className="focus:outline-none"
+                    type="button"
+                    onClick={toggleVisibility}
+                  >
+                    {isVisible ? (
+                      <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    ) : (
+                      <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    )}
+                  </button>
+                }
               />
             </div>
 
