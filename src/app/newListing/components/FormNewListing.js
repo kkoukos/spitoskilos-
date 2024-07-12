@@ -4,7 +4,7 @@ import { Form } from "@quillforms/renderer-core";
 import "@quillforms/renderer-core/build-style/style.css";
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
 import { useRouter } from "next/navigation";
-
+import LogoWhite from "../../../../public/spitoskilos_logo_img_white.svg";
 import { PlacesConnector } from "../../../connectors/PlacesConnector";
 
 registerCoreBlocks();
@@ -86,8 +86,8 @@ const FormNewListing = () => {
                 description: "Upload your listing to Spitoskilos!",
                 attachment: {
                   type: "image",
-                  // url: "https://quillforms.com/wp-content/uploads/2022/01/4207-ai-1.jpeg",
-                  url: "http://localhost/_next/static/media/spitoskilos_logo_img_white.6073b402.svg",
+
+                  url: LogoWhite.src,
                 },
                 attachmentMaxWidth: "300px",
               },
