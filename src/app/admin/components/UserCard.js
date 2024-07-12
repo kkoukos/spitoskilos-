@@ -14,7 +14,10 @@ export default function UserCard({
   };
   return (
     <>
-      <div className="h-[10%] w-full flex items-center justify-between rounded-xl bg-[#14293A] px-10">
+      <div
+        className="h-[10%] w-full flex items-center justify-between rounded-xl bg-[#14293A] px-10"
+        key={key}
+      >
         <div className="flex w-[50%] justify-between items-center">
           <Avatar
             src={user.profile_picture}
