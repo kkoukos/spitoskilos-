@@ -1,41 +1,66 @@
 import { NextResponse } from "next/server";
+import { jwtVerify } from "jose";
 
-import { cookies } from "next/headers";
-
-// 1. Specify protected and public routes
 const protectedRoutes = ["/dashboard"];
 const adminRoutes = ["/admin"];
 const publicRoutes = ["/"];
 const credRoutes = ["/login", "/signup"];
 
-export default async function middleware(req) {
-  // 2. Check if the current route is protected or public
+export async function middleware(req) {
   const path = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
   const isCredRoute = credRoutes.includes(path);
   const isAdminRoute = adminRoutes.includes(path);
 
-  // 3. Decrypt the session from the cookie
-  const sessionCookie = cookies().get("session")?.value;
+  // Get session from cookies
+  const sessionCookie = req.cookies.get("session");
+  let session = null;
 
-  if (isCredRoute && sessionCookie) {
-    return NextResponse.redirect(`${req.nextUrl.origin}/`);
-  }
-
-  if (isProtectedRoute && !sessionCookie) {
-    return NextResponse.redirect(`${req.nextUrl.origin}/`);
-  }
-  if (isAdminRoute && !sessionCookie) {
-    return NextResponse.redirect(`${req.nextUrl.origin}/`);
-  } else {
-    if (isAdminRoute && sessionCookie.type == 0) {
-      return NextResponse.redirect(`${req.nextUrl.origin}/`);
+  if (sessionCookie?.value) {
+    try {
+      // Since we're storing the whole user object in the session, parse it
+      session = JSON.parse(sessionCookie.value);
+    } catch (e) {
+      console.error("Failed to parse session:", e);
+      session = null;
     }
   }
+
+  // Redirect logic
+  if (isCredRoute && session) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
+  if (isProtectedRoute && !session) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  if (isAdminRoute) {
+    if (!session) {
+      return NextResponse.redirect(new URL("/login", req.url));
+    }
+    if (session.type !== 1) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+  }
+
+  // Add user info to headers for route handlers if session exists
+  const response = NextResponse.next();
+  if (session) {
+    response.headers.set(
+      "x-user-info",
+      JSON.stringify({
+        userId: session._id,
+        username: session.username,
+        type: session.type,
+      })
+    );
+  }
+
+  return response;
 }
 
-// Routes Middleware should not run on
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };
